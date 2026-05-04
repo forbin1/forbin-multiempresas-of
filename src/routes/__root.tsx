@@ -77,14 +77,16 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { pathname } = useLocation();
   const isAuthScreen = pathname === "/login";
+  const isAdminArea = pathname === "/admin" || pathname.startsWith("/admin/");
+  const hideChrome = isAuthScreen || isAdminArea;
   return (
     <AuthProvider>
       <div className="flex min-h-screen flex-col bg-background text-foreground">
-        {!isAuthScreen && <SiteHeader />}
+        {!hideChrome && <SiteHeader />}
         <main className="flex-1">
           <Outlet />
         </main>
-        {!isAuthScreen && <SiteFooter />}
+        {!hideChrome && <SiteFooter />}
         <Toaster theme="dark" richColors position="top-center" />
       </div>
     </AuthProvider>

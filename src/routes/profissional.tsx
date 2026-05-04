@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   MapPin,
   Phone,
@@ -32,6 +32,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { POSTS } from "@/data/mock";
 import { MentionText } from "@/components/MentionText";
 import { toast } from "sonner";
+import { addPost } from "@/hooks/use-posts";
 
 export const Route = createFileRoute("/profissional")({
   head: () => ({
@@ -258,6 +259,58 @@ function Row({ label, value }: { label: string; value: string }) {
 }
 
 export function ComposeBox() {
+  const [text, setText] = useState("");
+  const [image, setImage] = useState<string | null>(null);
+  const [video, setVideo] = useState<string | null>(null);
+  const imgInput = useRef<HTMLInputElement>(null);
+  const vidInput = useRef<HTMLInputElement>(null);
+
+  const onPickImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setImage(url);
+    setVideo(null);
+  };
+
+  const onPickVideo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setVideo(url);
+    setImage(null);
+  };
+
+  const reset = () => {
+    setText("");
+    setImage(null);
+    setVideo(null);
+    if (imgInput.current) imgInput.current.value = "";
+    if (vidInput.current) vidInput.current.value = "";
+  };
+
+  const publish = () => {
+    if (!text.trim() && !image && !video) {
+      toast.error("Adicione um texto, foto ou vídeo");
+      return;
+    }
+    addPost({
+      id: `u-${Date.now()}`,
+      author: "Você",
+      role: "Profissional",
+      avatar: "VC",
+      time: "Agora",
+      content: text.trim(),
+      image: image ?? undefined,
+      video: video ?? undefined,
+      likes: 0,
+      comments: 0,
+      type: video ? "video" : image ? "image" : "text",
+    });
+    toast.success("Experiência publicada!");
+    reset();
+  };
+
   return (
     <div className="rounded-2xl border border-border/60 bg-card p-4 sm:p-5">
       <div className="flex items-center gap-3">
@@ -265,18 +318,54 @@ export function ComposeBox() {
           CM
         </div>
         <input
-          placeholder="Compartilhe uma atualização…"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Compartilhe uma experiência…"
           className="h-11 min-w-0 flex-1 rounded-full border border-border bg-surface px-4 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:h-12 sm:px-5"
         />
       </div>
+
+      {image && (
+        <div className="relative mt-4">
+          <img src={image} alt="" className="w-full rounded-xl border border-border/60 object-cover" />
+          <Button size="sm" variant="secondary" className="absolute right-2 top-2 rounded-full" onClick={() => setImage(null)}>Remover</Button>
+        </div>
+      )}
+      {video && (
+        <div className="relative mt-4">
+          <video src={video} controls playsInline className="w-full rounded-xl border border-border/60 bg-black" />
+          <Button size="sm" variant="secondary" className="absolute right-2 top-2 rounded-full" onClick={() => setVideo(null)}>Remover</Button>
+        </div>
+      )}
+
+      <input
+        ref={imgInput}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/heic,image/heif,image/svg+xml"
+        hidden
+        onChange={onPickImage}
+      />
+      <input
+        ref={vidInput}
+        type="file"
+        accept="video/mp4,video/quicktime,video/mov,video/*"
+        hidden
+        onChange={onPickVideo}
+      />
+
       <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-border/60 pt-4">
         <div className="flex flex-wrap gap-1">
-          <Button variant="ghost" size="sm" className="rounded-full text-xs text-muted-foreground sm:text-sm"><FileText className="mr-1.5 h-4 w-4 text-primary sm:mr-2" /> Texto</Button>
-          <Button variant="ghost" size="sm" className="rounded-full text-xs text-muted-foreground sm:text-sm"><ImageIcon className="mr-1.5 h-4 w-4 text-primary sm:mr-2" /> Foto</Button>
-          <Button variant="ghost" size="sm" className="rounded-full text-xs text-muted-foreground sm:text-sm"><Video className="mr-1.5 h-4 w-4 text-primary sm:mr-2" /> Vídeo</Button>
-          <Button variant="ghost" size="sm" className="hidden rounded-full text-xs text-muted-foreground sm:inline-flex sm:text-sm"><Calendar className="mr-1.5 h-4 w-4 text-primary sm:mr-2" /> Evento</Button>
+          <Button variant="ghost" size="sm" className="rounded-full text-xs text-muted-foreground sm:text-sm" onClick={() => { setImage(null); setVideo(null); }}>
+            <FileText className="mr-1.5 h-4 w-4 text-primary sm:mr-2" /> Texto
+          </Button>
+          <Button variant="ghost" size="sm" className="rounded-full text-xs text-muted-foreground sm:text-sm" onClick={() => imgInput.current?.click()}>
+            <ImageIcon className="mr-1.5 h-4 w-4 text-primary sm:mr-2" /> Foto
+          </Button>
+          <Button variant="ghost" size="sm" className="rounded-full text-xs text-muted-foreground sm:text-sm" onClick={() => vidInput.current?.click()}>
+            <Video className="mr-1.5 h-4 w-4 text-primary sm:mr-2" /> Vídeo
+          </Button>
         </div>
-        <Button className="rounded-full bg-primary px-5 font-semibold text-primary-foreground shadow-gold hover:bg-primary/90 sm:px-6">
+        <Button onClick={publish} className="rounded-full bg-primary px-5 font-semibold text-primary-foreground shadow-gold hover:bg-primary/90 sm:px-6">
           Publicar
         </Button>
       </div>

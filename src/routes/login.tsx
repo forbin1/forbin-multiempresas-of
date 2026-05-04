@@ -61,14 +61,14 @@ function LoginPage() {
   };
 
   return (
-    <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-md flex-col justify-center px-4 py-16">
+    <div className="fixed inset-0 flex items-center justify-center overflow-hidden bg-background px-4 py-6">
       <div className="absolute inset-0 -z-10 bg-radial-gold opacity-50" />
-      <div className="rounded-3xl border border-border/60 bg-card p-10 shadow-elevated">
-        <div className="mb-8 flex justify-center">
-          <Logo size={48} />
+      <div className="max-h-full w-full max-w-md overflow-y-auto rounded-3xl border border-border/60 bg-card p-6 shadow-elevated sm:p-8">
+        <div className="mb-6 flex flex-col items-center text-center">
+          <Logo size={44} />
+          <h1 className="mt-5 font-display text-2xl font-bold tracking-tight sm:text-3xl">Bem-vindo de volta</h1>
+          <p className="mt-2 text-sm text-muted-foreground">Entre para acessar suas vagas e oportunidades.</p>
         </div>
-        <h1 className="font-display text-3xl font-bold tracking-tight">Bem-vindo de volta</h1>
-        <p className="mt-2 text-muted-foreground">Entre para acessar suas vagas e oportunidades.</p>
 
         <form onSubmit={handleLogin} className="mt-8 space-y-5">
           <div className="space-y-2">
@@ -135,18 +135,9 @@ function LoginPage() {
           Entrar com Google
         </Button>
 
-        <div className="mt-6 grid grid-cols-2 gap-3">
-          <Button asChild variant="outline" className="h-12 rounded-xl">
-            <Link to="/cadastro">Sou profissional</Link>
-          </Button>
-          <Button asChild variant="outline" className="h-12 rounded-xl">
-            <Link to="/cadastro-empresa">Sou empresa</Link>
-          </Button>
-        </div>
-
         <p className="mt-6 text-center text-sm text-muted-foreground">
           Não tem conta?{" "}
-          <Link to="/cadastro" className="font-semibold text-primary hover:underline">Cadastre-se</Link>
+          <Link to="/planos" className="font-semibold text-primary hover:underline">Cadastre-se</Link>
         </p>
       </div>
     </div>

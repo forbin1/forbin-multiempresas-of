@@ -13,13 +13,34 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-const nav = [
+type NavItem = { to: string; label: string };
+
+const NAV_LOGGED_OUT: NavItem[] = [
   { to: "/", label: "Início" },
+  { to: "/vagas", label: "Vagas" },
+  { to: "/planos", label: "Planos" },
+];
+
+const NAV_PROFESSIONAL: NavItem[] = [
   { to: "/vagas", label: "Vagas" },
   { to: "/cursos", label: "Cursos" },
   { to: "/feed", label: "Feed" },
-  { to: "/planos", label: "Planos" },
-] as const;
+  { to: "/certificados", label: "Certificados" },
+  { to: "/candidaturas", label: "Candidaturas" },
+];
+
+const NAV_COMPANY: NavItem[] = [
+  { to: "/profissionais-ativos", label: "Profissionais" },
+  { to: "/vagas", label: "Vagas" },
+  { to: "/feed", label: "Feed" },
+];
+
+const NAV_ADMIN: NavItem[] = [
+  { to: "/vagas", label: "Vagas" },
+  { to: "/profissionais-ativos", label: "Profissionais" },
+  { to: "/feed", label: "Feed" },
+  { to: "/cursos", label: "Cursos" },
+];
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -31,10 +52,18 @@ export function SiteHeader() {
     navigate({ to: "/" });
   };
 
+  const nav: NavItem[] = !user
+    ? NAV_LOGGED_OUT
+    : role === "admin"
+    ? NAV_ADMIN
+    : role === "company"
+    ? NAV_COMPANY
+    : NAV_PROFESSIONAL;
+
   const dashboardLink =
     role === "admin" ? "/admin" : role === "company" ? "/empresa" : "/profissional";
   const dashboardLabel =
-    role === "admin" ? "Painel Admin" : role === "company" ? "Painel Empresa" : "Meu Painel";
+    role === "admin" ? "Painel Admin" : role === "company" ? "Painel Empresa" : "Meu Perfil";
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-xl">
@@ -118,7 +147,7 @@ export function SiteHeader() {
                 <Link to="/login">Entrar</Link>
               </Button>
               <Button asChild className="rounded-full bg-primary text-primary-foreground shadow-gold hover:bg-primary/90">
-                <Link to="/cadastro">Cadastrar</Link>
+                <Link to="/planos">Cadastrar</Link>
               </Button>
             </>
           ) : null}
@@ -168,7 +197,7 @@ export function SiteHeader() {
                     <Link to="/login">Entrar</Link>
                   </Button>
                   <Button asChild className="rounded-full bg-primary text-primary-foreground">
-                    <Link to="/cadastro">Cadastrar</Link>
+                    <Link to="/planos">Cadastrar</Link>
                   </Button>
                 </>
               )}

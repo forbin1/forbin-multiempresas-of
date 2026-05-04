@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
+import { useAuth } from "@/hooks/use-auth";
 import {
   Shield,
   Briefcase,
@@ -33,6 +34,11 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const { user, role, loading } = useAuth();
+  if (!loading && user) {
+    const target = role === "admin" ? "/admin" : role === "company" ? "/profissionais-ativos" : "/vagas";
+    return <Navigate to={target} />;
+  }
   return (
     <div>
       {/* HERO */}

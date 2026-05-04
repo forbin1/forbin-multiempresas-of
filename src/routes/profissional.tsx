@@ -13,7 +13,6 @@ import {
   FileText,
   Heart,
   MessageCircle,
-  Share2,
   CheckCircle2,
   MoreHorizontal,
   Pencil,
@@ -290,10 +289,31 @@ export function PostCard({ post, owned = false }: { post: typeof POSTS[number]; 
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(post.content);
   const [deleted, setDeleted] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState(post.likes);
+  const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState<{ id: string; author: string; text: string }[]>([]);
+  const [commentDraft, setCommentDraft] = useState("");
 
   if (deleted) return null;
 
   const handle = post.author.toLowerCase().replace(/\s+/g, ".");
+  const totalComments = post.comments + comments.length;
+
+  const toggleLike = () => {
+    setLiked((prev) => {
+      setLikes((l) => l + (prev ? -1 : 1));
+      return !prev;
+    });
+  };
+
+  const addComment = () => {
+    const text = commentDraft.trim();
+    if (!text) return;
+    setComments((c) => [...c, { id: `${Date.now()}`, author: "Você", text }]);
+    setCommentDraft("");
+  };
+
   return (
     <article className="rounded-2xl border border-border/60 bg-card p-4 sm:p-6">
       <header className="flex items-center gap-3">
@@ -344,11 +364,55 @@ export function PostCard({ post, owned = false }: { post: typeof POSTS[number]; 
           <MentionText>{content}</MentionText>
         </p>
       )}
+      {post.image && (
+        <img src={post.image} alt="" className="mt-4 w-full rounded-xl border border-border/60 object-cover" />
+      )}
+      {post.video && (
+        <video
+          src={post.video}
+          controls
+          playsInline
+          className="mt-4 w-full rounded-xl border border-border/60 bg-black"
+        />
+      )}
       <footer className="mt-5 flex flex-wrap items-center gap-1 border-t border-border/60 pt-4 text-sm text-muted-foreground sm:gap-2">
-        <Button variant="ghost" size="sm" className="rounded-full"><Heart className="mr-1.5 h-4 w-4 sm:mr-2" /> {post.likes}</Button>
-        <Button variant="ghost" size="sm" className="rounded-full"><MessageCircle className="mr-1.5 h-4 w-4 sm:mr-2" /> {post.comments}</Button>
-        <Button variant="ghost" size="sm" className="rounded-full"><Share2 className="mr-1.5 h-4 w-4 sm:mr-2" /> Compartilhar</Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={toggleLike}
+          className={`rounded-full ${liked ? "text-primary" : ""}`}
+        >
+          <Heart className={`mr-1.5 h-4 w-4 sm:mr-2 ${liked ? "fill-primary" : ""}`} /> {likes}
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setShowComments((s) => !s)}
+          className="rounded-full"
+        >
+          <MessageCircle className="mr-1.5 h-4 w-4 sm:mr-2" /> {totalComments}
+        </Button>
       </footer>
+      {showComments && (
+        <div className="mt-4 space-y-3 border-t border-border/60 pt-4">
+          {comments.map((c) => (
+            <div key={c.id} className="rounded-xl bg-surface px-3 py-2 text-sm">
+              <p className="font-semibold">{c.author}</p>
+              <p className="text-muted-foreground">{c.text}</p>
+            </div>
+          ))}
+          <div className="flex gap-2">
+            <Textarea
+              value={commentDraft}
+              onChange={(e) => setCommentDraft(e.target.value)}
+              placeholder="Escreva um comentário..."
+              rows={1}
+              className="min-h-[40px] resize-none"
+            />
+            <Button size="sm" onClick={addComment}>Enviar</Button>
+          </div>
+        </div>
+      )}
     </article>
   );
 }

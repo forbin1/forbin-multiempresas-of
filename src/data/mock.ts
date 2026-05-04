@@ -141,6 +141,7 @@ export type Post = {
   time: string;
   content: string;
   image?: string;
+  video?: string;
   likes: number;
   comments: number;
   type?: "text" | "image" | "video";
@@ -194,5 +195,44 @@ export const POSTS: Post[] = [
     likes: 201,
     comments: 33,
     type: "text",
+  },
+  {
+    id: "p5",
+    author: "Júlia Santos",
+    role: "Escolta Armada · RJ",
+    avatar: "JS",
+    time: "Há 6h",
+    content:
+      "Evento concluído com sucesso no Maracanã RJ com a empresa @forcaelite 🏟️🛡️ Mais de 70 mil pessoas, equipe impecável, zero ocorrências. Orgulho de fazer parte!",
+    image: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=1280&h=720&fit=crop",
+    likes: 487,
+    comments: 62,
+    type: "image",
+  },
+  {
+    id: "p6",
+    author: "Pedro Almeida",
+    role: "Bombeiro Civil · Salvador",
+    avatar: "PA",
+    time: "Há 12h",
+    content:
+      "Treinamento de combate a incêndio com a brigada nova. Preparação é o que separa a tragédia da resposta. 🔥",
+    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1280&h=720&fit=crop",
+    likes: 256,
+    comments: 28,
+    type: "image",
+  },
+  {
+    id: "p7",
+    author: "Ana Costa",
+    role: "Vigilante Líder · Brasília",
+    avatar: "AC",
+    time: "Há 1d",
+    content:
+      "Cobertura completa do show no estádio ontem com a @forcaelite. Equipe coesa faz toda a diferença em eventos de grande porte. 🎤",
+    video: "https://cdn.coverr.co/videos/coverr-security-camera-at-night-3389/1080p.mp4",
+    likes: 612,
+    comments: 94,
+    type: "video",
   },
 ];

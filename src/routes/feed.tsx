@@ -10,8 +10,8 @@ import { RequireAuth } from "@/components/RequireAuth";
 export const Route = createFileRoute("/feed")({
   head: () => ({
     meta: [
-      { title: "Feed — FORBIN MultiEmpresas" },
-      { name: "description", content: "Acompanhe publicações de profissionais e empresas do setor de segurança privada." },
+      { title: "Experiências — FORBIN MultiEmpresas" },
+      { name: "description", content: "Acompanhe experiências de profissionais e empresas do setor de segurança privada." },
     ],
   }),
   component: FeedPage,
@@ -20,8 +20,8 @@ export const Route = createFileRoute("/feed")({
 function FeedPage() {
   return (
     <RequireAuth
-      title="Feed exclusivo para membros"
-      description="O feed é onde profissionais e empresas compartilham experiências. Cadastre-se grátis para participar."
+      title="Experiências exclusivas para membros"
+      description="Aqui profissionais e empresas compartilham experiências do dia a dia. Cadastre-se grátis para participar."
     >
       <FeedContent />
     </RequireAuth>
@@ -57,7 +57,7 @@ function FeedContent() {
 
         {/* Centro — feed */}
         <div className="min-w-0 space-y-6">
-          <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">Feed</h1>
+          <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">Experiências</h1>
           <ComposeBox />
           {POSTS.map((p, idx) => (
             <Fragment key={p.id}>

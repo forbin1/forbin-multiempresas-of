@@ -174,6 +174,68 @@ export type Database = {
           },
         ]
       }
+      jobs: {
+        Row: {
+          benefits: string | null
+          city: string | null
+          company_id: string | null
+          contract_type: string
+          created_at: string
+          description: string | null
+          id: string
+          is_published: boolean
+          modality: string
+          requirements: string | null
+          salary_max: number | null
+          salary_min: number | null
+          state: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          benefits?: string | null
+          city?: string | null
+          company_id?: string | null
+          contract_type?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_published?: boolean
+          modality?: string
+          requirements?: string | null
+          salary_max?: number | null
+          salary_min?: number | null
+          state?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          benefits?: string | null
+          city?: string | null
+          company_id?: string | null
+          contract_type?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_published?: boolean
+          modality?: string
+          requirements?: string | null
+          salary_max?: number | null
+          salary_min?: number | null
+          state?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jobs_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_progress: {
         Row: {
           completed: boolean

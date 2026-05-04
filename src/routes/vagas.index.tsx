@@ -32,6 +32,8 @@ const REGIONS = ["Todas", "São Paulo", "Rio de Janeiro", "Minas Gerais", "Paran
 const TYPES = ["Todos", "CLT", "PJ", "Diária", "Temporário"] as const;
 
 function VagasPage() {
+  const { user, loading } = useAuth();
+  const isLocked = !loading && !user;
   const [region, setRegion] = useState("Todas");
   const [query, setQuery] = useState("");
   const [type, setType] = useState<(typeof TYPES)[number]>("Todos");

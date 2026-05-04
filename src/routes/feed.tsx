@@ -5,6 +5,7 @@ import { POSTS, JOBS } from "@/data/mock";
 import { ComposeBox, PostCard } from "./profissional";
 import { ADS, AdBanner } from "@/components/AdBanner";
 import { Fragment } from "react";
+import { RequireAuth } from "@/components/RequireAuth";
 
 export const Route = createFileRoute("/feed")({
   head: () => ({
@@ -17,6 +18,17 @@ export const Route = createFileRoute("/feed")({
 });
 
 function FeedPage() {
+  return (
+    <RequireAuth
+      title="Feed exclusivo para membros"
+      description="O feed é onde profissionais e empresas compartilham experiências. Cadastre-se grátis para participar."
+    >
+      <FeedContent />
+    </RequireAuth>
+  );
+}
+
+function FeedContent() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10 sm:px-6 lg:px-8">
       <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)_320px]">

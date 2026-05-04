@@ -1,17 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LayoutTemplate } from "lucide-react";
-import { AdminPageHeader, AdminPlaceholder } from "@/components/admin/AdminPageHeader";
+import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
+import { LandingCms } from "@/components/admin/LandingCms";
 
 export const Route = createFileRoute("/admin/landing")({
   component: () => (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
       <AdminPageHeader
         icon={LayoutTemplate}
         eyebrow="CMS"
         title="Landing Page"
-        description="Editor visual completo de textos e imagens da página inicial."
+        description="Edite textos e imagens da página inicial. As alterações são publicadas instantaneamente."
       />
-      <AdminPlaceholder note="Editor visual (CMS) da landing será implementado em uma etapa dedicada — é um módulo grande." />
+      <LandingCms />
     </div>
   ),
 });

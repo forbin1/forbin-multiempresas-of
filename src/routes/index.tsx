@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import heroImg from "@/assets/hero-security.jpg";
 import { JOBS, COURSES } from "@/data/mock";
+import { useLandingContent } from "@/hooks/use-landing-content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,6 +39,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const { user, role, loading } = useAuth();
   const navigate = useNavigate();
+  const { content: c } = useLandingContent();
   useEffect(() => {
     if (!loading && user) {
       const target = role === "admin" ? "/admin" : role === "company" ? "/profissionais-ativos" : "/vagas";
@@ -60,17 +62,15 @@ function HomePage() {
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:px-8 lg:py-28">
           <div className="flex flex-col justify-center">
             <Badge className="mb-6 w-fit gap-2 rounded-full border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary">
-              <Sparkles className="h-3.5 w-3.5" /> Nova era para segurança privada
+              <Sparkles className="h-3.5 w-3.5" /> {c.hero_eyebrow}
             </Badge>
             <h1 className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              Sua próxima{" "}
-              <span className="text-gradient-gold">missão profissional</span>{" "}
-              começa aqui.
+              {c.hero_title_1}{" "}
+              <span className="text-gradient-gold">{c.hero_title_highlight}</span>{" "}
+              {c.hero_title_2}
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground sm:text-xl">
-              FORBIN MultiEmpresas conecta vigilantes, supervisores, escoltas e
-              empresas do setor em uma plataforma feita para quem leva
-              segurança a sério.
+              {c.hero_subtitle}
             </p>
 
             <div className="mt-8">
@@ -80,20 +80,20 @@ function HomePage() {
             <div className="mt-6 flex flex-wrap gap-4">
               <Button asChild size="lg" className="h-14 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground shadow-gold hover:bg-primary/90">
                 <Link to="/cadastro">
-                  Sou profissional <ArrowRight className="ml-2 h-5 w-5" />
+                  {c.hero_cta_pro} <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="h-14 rounded-full border-border bg-surface px-8 text-base font-semibold hover:bg-accent">
                 <Link to="/cadastro-empresa">
-                  Sou empresa
+                  {c.hero_cta_company}
                 </Link>
               </Button>
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 border-t border-border/60 pt-8">
-              <Stat value="2.4k+" label="Profissionais" />
-              <Stat value="380+" label="Empresas" />
-              <Stat value="1.2k+" label="Vagas ativas" />
+              <Stat value={c.stat1_value} label={c.stat1_label} />
+              <Stat value={c.stat2_value} label={c.stat2_label} />
+              <Stat value={c.stat3_value} label={c.stat3_label} />
             </div>
           </div>
 
@@ -101,7 +101,7 @@ function HomePage() {
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-gold opacity-20 blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-border/60 shadow-elevated">
               <img
-                src={heroImg}
+                src={c.hero_image || heroImg}
                 alt="Profissional de segurança em ambiente corporativo"
                 width={1600}
                 height={1024}
@@ -130,17 +130,17 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="mb-14 max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-              Como funciona
+              {c.how_eyebrow}
             </p>
             <h2 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              Três passos para começar
+              {c.how_title}
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {[
-              { icon: Users, title: "Cadastre seu perfil", desc: "Monte um currículo completo: cursos, experiência, foto e dados pessoais. Tudo em passos simples." },
-              { icon: Briefcase, title: "Encontre oportunidades", desc: "Veja vagas no marketplace, filtre por região e função, e candidate-se com um clique." },
-              { icon: Shield, title: "Conecte-se com empresas", desc: "Empresas analisam seu perfil e marcam reuniões direto pelo painel. Simples e direto." },
+              { icon: Users, title: c.how_step1_title, desc: c.how_step1_desc },
+              { icon: Briefcase, title: c.how_step2_title, desc: c.how_step2_desc },
+              { icon: Shield, title: c.how_step3_title, desc: c.how_step3_desc },
             ].map((s, i) => (
               <Card key={s.title} className="group relative overflow-hidden border-border/60 bg-card transition hover:border-primary/40">
                 <CardContent className="p-8">
@@ -167,13 +167,13 @@ function HomePage() {
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-                Marketplace
+                {c.jobs_eyebrow}
               </p>
               <h2 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-                Vagas em destaque
+                {c.jobs_title}
               </h2>
               <p className="mt-3 max-w-xl text-muted-foreground">
-                Oportunidades publicadas por empresas verificadas, atualizadas em tempo real.
+                {c.jobs_subtitle}
               </p>
             </div>
             <Button asChild variant="outline" className="rounded-full">
@@ -205,13 +205,13 @@ function HomePage() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {COURSES.map((c) => (
+            {COURSES.map((course) => (
               <div
-                key={c}
+                key={course}
                 className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card px-4 py-5 transition hover:border-primary/40"
               >
                 <GraduationCap className="h-5 w-5 shrink-0 text-primary" />
-                <span className="text-sm font-medium">{c}</span>
+                <span className="text-sm font-medium">{course}</span>
               </div>
             ))}
           </div>
@@ -223,14 +223,13 @@ function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-              Para empresas
+              {c.company_eyebrow}
             </p>
             <h2 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              Recrute profissionais qualificados em minutos.
+              {c.company_title}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Publique vagas, receba candidaturas filtradas pelo seu painel admin
-              e marque reuniões diretamente com os candidatos.
+              {c.company_subtitle}
             </p>
             <ul className="mt-8 space-y-3">
               {[
@@ -298,18 +297,17 @@ function HomePage() {
         <div className="absolute inset-0 bg-radial-gold opacity-60" />
         <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 lg:px-8">
           <h2 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
-            Pronto para a próxima missão?
+            {c.cta_title}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Cadastre-se gratuitamente e comece a se conectar com as melhores empresas
-            de segurança privada do Brasil.
+            {c.cta_subtitle}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg" className="h-14 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-gold hover:bg-primary/90">
-              <Link to="/cadastro">Criar conta grátis</Link>
+              <Link to="/cadastro">{c.cta_btn_primary}</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="h-14 rounded-full border-border bg-surface px-10 text-base font-semibold">
-              <Link to="/vagas">Explorar vagas</Link>
+              <Link to="/vagas">{c.cta_btn_secondary}</Link>
             </Button>
           </div>
         </div>

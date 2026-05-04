@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Pencil, Trash2, Eye, EyeOff, Plus, GraduationCap, Loader2 } from "lucide-react";
+import { Pencil, Trash2, Eye, EyeOff, Plus, GraduationCap, Loader2, Layers } from "lucide-react";
+import { ModulesManager } from "@/components/admin/ModulesManager";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -65,6 +66,7 @@ export function CoursesAdmin() {
   const [editing, setEditing] = useState<Course | null>(null);
   const [creating, setCreating] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [modulesFor, setModulesFor] = useState<Course | null>(null);
 
   const load = async () => {
     setLoading(true);
@@ -157,6 +159,9 @@ export function CoursesAdmin() {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex justify-end gap-1">
+                        <Button size="sm" variant="ghost" className="rounded-full px-3" onClick={() => setModulesFor(c)} title="Módulos e aulas">
+                          <Layers className="mr-1.5 h-4 w-4" /> Módulos
+                        </Button>
                         <Button size="icon" variant="ghost" onClick={() => togglePublished(c)} title={c.is_published ? "Ocultar" : "Publicar"}>
                           {c.is_published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                         </Button>
@@ -206,6 +211,12 @@ export function CoursesAdmin() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+      <ModulesManager
+        open={!!modulesFor}
+        courseId={modulesFor?.id ?? null}
+        courseTitle={modulesFor?.title ?? ""}
+        onClose={() => setModulesFor(null)}
+      />
     </div>
   );
 }

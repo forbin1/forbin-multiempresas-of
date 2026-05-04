@@ -284,7 +284,14 @@ export function ComposeBox() {
   );
 }
 
-export function PostCard({ post }: { post: typeof POSTS[number] }) {
+export function PostCard({ post, owned = false }: { post: typeof POSTS[number]; owned?: boolean }) {
+  const [content, setContent] = useState(post.content);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(post.content);
+  const [deleted, setDeleted] = useState(false);
+
+  if (deleted) return null;
+
   return (
     <article className="rounded-2xl border border-border/60 bg-card p-4 sm:p-6">
       <header className="flex items-center gap-3">
@@ -295,8 +302,40 @@ export function PostCard({ post }: { post: typeof POSTS[number] }) {
           <p className="truncate font-semibold">{post.author}</p>
           <p className="truncate text-xs text-muted-foreground">{post.role} · {post.time}</p>
         </div>
+        {owned && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <MoreHorizontal className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => { setDraft(content); setEditing(true); }}>
+                <Pencil className="mr-2 h-4 w-4" /> Editar
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="text-destructive"
+                onClick={() => { setDeleted(true); toast.success("Post excluído"); }}
+              >
+                <Trash2 className="mr-2 h-4 w-4" /> Excluir
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </header>
-      <p className="mt-4 break-words text-base leading-relaxed">{post.content}</p>
+      {editing ? (
+        <div className="mt-4 space-y-3">
+          <Textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={4} />
+          <div className="flex justify-end gap-2">
+            <Button variant="ghost" size="sm" onClick={() => setEditing(false)}>Cancelar</Button>
+            <Button size="sm" onClick={() => { setContent(draft); setEditing(false); toast.success("Post atualizado"); }}>Salvar</Button>
+          </div>
+        </div>
+      ) : (
+        <p className="mt-4 break-words text-base leading-relaxed">
+          <MentionText>{content}</MentionText>
+        </p>
+      )}
       <footer className="mt-5 flex flex-wrap items-center gap-1 border-t border-border/60 pt-4 text-sm text-muted-foreground sm:gap-2">
         <Button variant="ghost" size="sm" className="rounded-full"><Heart className="mr-1.5 h-4 w-4 sm:mr-2" /> {post.likes}</Button>
         <Button variant="ghost" size="sm" className="rounded-full"><MessageCircle className="mr-1.5 h-4 w-4 sm:mr-2" /> {post.comments}</Button>

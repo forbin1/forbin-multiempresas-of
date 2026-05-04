@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { POSTS, JOBS } from "@/data/mock";
+import { JOBS } from "@/data/mock";
+import { usePosts } from "@/hooks/use-posts";
 import { ComposeBox, PostCard } from "./profissional";
 import { ADS, AdBanner } from "@/components/AdBanner";
 import { Fragment } from "react";
@@ -59,7 +60,7 @@ function FeedContent() {
         <div className="min-w-0 space-y-6">
           <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">Experiências</h1>
           <ComposeBox />
-          {POSTS.map((p, idx) => (
+          {usePosts().map((p, idx) => (
             <Fragment key={p.id}>
               <PostCard post={p} owned={idx === 0} />
               {(idx + 1) % 2 === 0 && (

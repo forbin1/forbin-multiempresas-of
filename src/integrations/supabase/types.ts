@@ -141,6 +141,36 @@ export type Database = {
         }
         Relationships: []
       }
+      course_modules: {
+        Row: {
+          course_id: string
+          created_at: string
+          description: string | null
+          id: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       courses: {
         Row: {
           category: string
@@ -322,6 +352,7 @@ export type Database = {
           description: string | null
           duration_minutes: number | null
           id: string
+          module_id: string | null
           sort_order: number
           title: string
           video_url: string | null
@@ -332,6 +363,7 @@ export type Database = {
           description?: string | null
           duration_minutes?: number | null
           id?: string
+          module_id?: string | null
           sort_order?: number
           title: string
           video_url?: string | null
@@ -342,6 +374,7 @@ export type Database = {
           description?: string | null
           duration_minutes?: number | null
           id?: string
+          module_id?: string | null
           sort_order?: number
           title?: string
           video_url?: string | null

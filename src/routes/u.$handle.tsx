@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { findProfileByHandle, type ProfileEntry } from "@/data/profiles";
+import { findProfileByHandle } from "@/data/profiles";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "sonner";
@@ -244,5 +244,3 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
     </div>
   );
 }
-
-export { ProfileEntry };

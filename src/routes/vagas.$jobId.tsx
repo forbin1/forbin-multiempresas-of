@@ -24,6 +24,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { JOBS } from "@/data/mock";
+import { useAuthGate } from "@/components/RequireAuth";
 
 export const Route = createFileRoute("/vagas/$jobId")({
   loader: ({ params }) => {
@@ -55,6 +56,7 @@ function JobDetail() {
   const [open, setOpen] = useState(false);
   const [applied, setApplied] = useState(false);
   const [saved, setSaved] = useState(false);
+  const gate = useAuthGate();
 
   const handleApply = () => {
     setApplied(true);
@@ -79,10 +81,12 @@ function JobDetail() {
   };
 
   const handleSave = () => {
-    setSaved((s) => !s);
-    toast(saved ? "Vaga removida dos salvos" : "Vaga salva", {
-      description: saved ? undefined : "Disponível em Vagas salvas no seu painel.",
-    });
+    gate(() => {
+      setSaved((s) => !s);
+      toast(saved ? "Vaga removida dos salvos" : "Vaga salva", {
+        description: saved ? undefined : "Disponível em Vagas salvas no seu painel.",
+      });
+    }, "Faça login para salvar vagas");
   };
 
   return (
@@ -164,7 +168,7 @@ function JobDetail() {
               ) : (
                 <Button
                   size="lg"
-                  onClick={() => setOpen(true)}
+                  onClick={() => gate(() => setOpen(true), "Faça login para se candidatar")}
                   className="h-14 w-full rounded-2xl bg-primary text-base font-bold text-primary-foreground shadow-gold hover:bg-primary/90"
                 >
                   <Send className="mr-2 h-5 w-5" /> Candidatar-se

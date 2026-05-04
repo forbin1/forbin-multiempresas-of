@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
+import { useAuth } from "@/hooks/use-auth";
 import {
   Shield,
   Briefcase,

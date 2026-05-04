@@ -1,5 +1,7 @@
-import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
+import { VslPlayer } from "@/components/VslPlayer";
 import {
   Shield,
   Briefcase,

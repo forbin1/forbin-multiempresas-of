@@ -100,7 +100,7 @@ export function CoursesAdmin() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
       <AdminPageHeader
         icon={GraduationCap}
         eyebrow="Conteúdo educacional"
@@ -123,51 +123,56 @@ export function CoursesAdmin() {
         </div>
       ) : (
         <div className="overflow-hidden rounded-2xl border border-border/60 bg-card">
-          <table className="w-full text-sm">
-            <thead className="border-b border-border/60 text-left text-xs uppercase tracking-wider text-muted-foreground">
-              <tr>
-                <th className="px-4 py-3">Título</th>
-                <th className="px-4 py-3">Categoria</th>
-                <th className="px-4 py-3">Nível</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3 text-right">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((c) => (
-                <tr key={c.id} className="border-b border-border/40 last:border-0">
-                  <td className="px-4 py-3 font-medium">{c.title}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{c.category}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{c.level}</td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={
-                        "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs " +
-                        (c.is_published
-                          ? "bg-emerald-500/15 text-emerald-400"
-                          : "bg-muted text-muted-foreground")
-                      }
-                    >
-                      {c.is_published ? "Publicado" : "Oculto"}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex justify-end gap-1">
-                      <Button size="icon" variant="ghost" onClick={() => togglePublished(c)} title={c.is_published ? "Ocultar" : "Publicar"}>
-                        {c.is_published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </Button>
-                      <Button size="icon" variant="ghost" onClick={() => setEditing(c)} title="Editar">
-                        <Pencil className="h-4 w-4" />
-                      </Button>
-                      <Button size="icon" variant="ghost" onClick={() => setDeleteId(c.id)} title="Excluir">
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    </div>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] text-sm">
+              <thead className="border-b border-border/60 text-left text-xs uppercase tracking-wider text-muted-foreground">
+                <tr>
+                  <th className="px-4 py-3">Título</th>
+                  <th className="hidden px-4 py-3 sm:table-cell">Categoria</th>
+                  <th className="hidden px-4 py-3 md:table-cell">Nível</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3 text-right">Ações</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {items.map((c) => (
+                  <tr key={c.id} className="border-b border-border/40 last:border-0">
+                    <td className="px-4 py-3 font-medium">
+                      <div className="truncate">{c.title}</div>
+                      <div className="text-xs text-muted-foreground sm:hidden">{c.category} · {c.level}</div>
+                    </td>
+                    <td className="hidden px-4 py-3 text-muted-foreground sm:table-cell">{c.category}</td>
+                    <td className="hidden px-4 py-3 text-muted-foreground md:table-cell">{c.level}</td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={
+                          "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs " +
+                          (c.is_published
+                            ? "bg-emerald-500/15 text-emerald-400"
+                            : "bg-muted text-muted-foreground")
+                        }
+                      >
+                        {c.is_published ? "Publicado" : "Oculto"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex justify-end gap-1">
+                        <Button size="icon" variant="ghost" onClick={() => togglePublished(c)} title={c.is_published ? "Ocultar" : "Publicar"}>
+                          {c.is_published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </Button>
+                        <Button size="icon" variant="ghost" onClick={() => setEditing(c)} title="Editar">
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon" variant="ghost" onClick={() => setDeleteId(c.id)} title="Excluir">
+                          <Trash2 className="h-4 w-4 text-destructive" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

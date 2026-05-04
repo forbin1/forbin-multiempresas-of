@@ -5,7 +5,7 @@ import { PlansAdmin } from "@/components/admin/PlansAdmin";
 
 export const Route = createFileRoute("/admin/planos")({
   component: () => (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
       <AdminPageHeader
         icon={CreditCard}
         eyebrow="Monetização"

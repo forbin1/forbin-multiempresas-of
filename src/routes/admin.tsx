@@ -27,9 +27,9 @@ function AdminLayout() {
   return (
     <div className="flex min-h-screen w-full bg-background">
       <AdminSidebar />
-      <div className="flex min-h-screen flex-1 flex-col">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col">
         <AdminMobileBar />
-        <main className="flex-1 overflow-x-hidden">
+        <main className="min-w-0 flex-1 overflow-x-hidden">
           <Outlet />
         </main>
       </div>

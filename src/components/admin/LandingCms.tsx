@@ -149,12 +149,12 @@ export function LandingCms() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between gap-4">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-muted-foreground">
           Edite textos e imagens. As alterações refletem instantaneamente em{" "}
           <span className="font-mono">/</span>.
         </p>
-        <Button onClick={save} disabled={saving}>
+        <Button onClick={save} disabled={saving} className="w-full sm:w-auto">
           {saving ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
@@ -165,17 +165,19 @@ export function LandingCms() {
       </div>
 
       <Tabs defaultValue={SECTIONS[0].id} className="w-full">
-        <TabsList className="flex w-full flex-wrap justify-start gap-1 bg-surface/40">
-          {SECTIONS.map((s) => (
-            <TabsTrigger key={s.id} value={s.id} className="text-xs">
-              {s.title}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="-mx-1 overflow-x-auto pb-1">
+          <TabsList className="inline-flex w-max gap-1 bg-surface/40">
+            {SECTIONS.map((s) => (
+              <TabsTrigger key={s.id} value={s.id} className="whitespace-nowrap text-xs">
+                {s.title}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
 
         {SECTIONS.map((s) => (
           <TabsContent key={s.id} value={s.id} className="mt-6">
-            <div className="grid gap-5 rounded-2xl border border-border/60 bg-card p-6">
+            <div className="grid gap-5 rounded-2xl border border-border/60 bg-card p-4 sm:p-6">
               {s.fields.map((f) => (
                 <FieldRow
                   key={f.key as string}
@@ -245,13 +247,14 @@ function FieldRow({
         />
       ) : field.type === "image" ? (
         <div className="space-y-3">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={() => fileRef.current?.click()}
               disabled={uploading}
+              className="w-full sm:w-auto"
             >
               {uploading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

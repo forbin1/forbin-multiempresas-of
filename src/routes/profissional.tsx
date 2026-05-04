@@ -14,7 +14,6 @@ import {
   Heart,
   MessageCircle,
   CheckCircle2,
-  CheckCircle2,
   MoreHorizontal,
   Pencil,
   Trash2,

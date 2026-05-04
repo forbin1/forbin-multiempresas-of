@@ -24,6 +24,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { JOBS } from "@/data/mock";
+import { useAuthGate } from "@/components/RequireAuth";
 
 export const Route = createFileRoute("/vagas/$jobId")({
   loader: ({ params }) => {

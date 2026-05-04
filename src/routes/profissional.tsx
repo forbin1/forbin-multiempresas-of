@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   MapPin,
   Phone,
@@ -14,11 +15,23 @@ import {
   MessageCircle,
   Share2,
   CheckCircle2,
+  MoreHorizontal,
+  Pencil,
+  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Textarea } from "@/components/ui/textarea";
 import { POSTS } from "@/data/mock";
+import { MentionText } from "@/components/MentionText";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/profissional")({
   head: () => ({
@@ -70,17 +83,20 @@ function PerfilProfissional() {
                 <span className="flex items-center gap-1.5"><Phone className="h-4 w-4 text-primary" /> (11) 99999-0000</span>
               </div>
             </div>
-            <div className="flex gap-3">
-              <Button variant="outline" className="h-12 rounded-full">Mensagem</Button>
-              <Button className="h-12 rounded-full bg-primary px-6 font-semibold text-primary-foreground shadow-gold hover:bg-primary/90">
-                Conectar
+            <div className="flex flex-wrap gap-3">
+              <Button asChild className="h-12 rounded-full bg-[#25D366] px-6 font-semibold text-white hover:bg-[#1ebe5a]">
+                <a href="https://wa.me/5511999990000" target="_blank" rel="noreferrer">
+                  <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
+                </a>
+              </Button>
+              <Button variant="outline" className="h-12 rounded-full">
+                <Heart className="mr-2 h-5 w-5" /> Salvar
               </Button>
             </div>
           </div>
 
           {/* Mini stats */}
-          <div className="mt-8 grid grid-cols-2 gap-3 border-t border-border/60 pt-6 sm:grid-cols-4">
-            <Stat label="Conexões" value="486" />
+          <div className="mt-8 grid grid-cols-3 gap-3 border-t border-border/60 pt-6">
             <Stat label="Cursos" value="7" />
             <Stat label="Anos de experiência" value="8" />
             <Stat label="Postos atendidos" value="23" />
@@ -105,8 +121,8 @@ function PerfilProfissional() {
 
               <TabsContent value="feed" className="mt-6 space-y-6">
                 <ComposeBox />
-                {POSTS.slice(0, 3).map((p) => (
-                  <PostCard key={p.id} post={p} />
+                {POSTS.slice(0, 3).map((p, i) => (
+                  <PostCard key={p.id} post={p} owned={i === 0} />
                 ))}
               </TabsContent>
 
@@ -268,7 +284,14 @@ export function ComposeBox() {
   );
 }
 
-export function PostCard({ post }: { post: typeof POSTS[number] }) {
+export function PostCard({ post, owned = false }: { post: typeof POSTS[number]; owned?: boolean }) {
+  const [content, setContent] = useState(post.content);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(post.content);
+  const [deleted, setDeleted] = useState(false);
+
+  if (deleted) return null;
+
   return (
     <article className="rounded-2xl border border-border/60 bg-card p-4 sm:p-6">
       <header className="flex items-center gap-3">
@@ -279,8 +302,40 @@ export function PostCard({ post }: { post: typeof POSTS[number] }) {
           <p className="truncate font-semibold">{post.author}</p>
           <p className="truncate text-xs text-muted-foreground">{post.role} · {post.time}</p>
         </div>
+        {owned && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <MoreHorizontal className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => { setDraft(content); setEditing(true); }}>
+                <Pencil className="mr-2 h-4 w-4" /> Editar
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="text-destructive"
+                onClick={() => { setDeleted(true); toast.success("Post excluído"); }}
+              >
+                <Trash2 className="mr-2 h-4 w-4" /> Excluir
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </header>
-      <p className="mt-4 break-words text-base leading-relaxed">{post.content}</p>
+      {editing ? (
+        <div className="mt-4 space-y-3">
+          <Textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={4} />
+          <div className="flex justify-end gap-2">
+            <Button variant="ghost" size="sm" onClick={() => setEditing(false)}>Cancelar</Button>
+            <Button size="sm" onClick={() => { setContent(draft); setEditing(false); toast.success("Post atualizado"); }}>Salvar</Button>
+          </div>
+        </div>
+      ) : (
+        <p className="mt-4 break-words text-base leading-relaxed">
+          <MentionText>{content}</MentionText>
+        </p>
+      )}
       <footer className="mt-5 flex flex-wrap items-center gap-1 border-t border-border/60 pt-4 text-sm text-muted-foreground sm:gap-2">
         <Button variant="ghost" size="sm" className="rounded-full"><Heart className="mr-1.5 h-4 w-4 sm:mr-2" /> {post.likes}</Button>
         <Button variant="ghost" size="sm" className="rounded-full"><MessageCircle className="mr-1.5 h-4 w-4 sm:mr-2" /> {post.comments}</Button>

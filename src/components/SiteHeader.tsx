@@ -28,12 +28,14 @@ const NAV_PROFESSIONAL: NavItem[] = [
   { to: "/feed", label: "Feed" },
   { to: "/certificados", label: "Certificados" },
   { to: "/candidaturas", label: "Candidaturas" },
+  { to: "/favoritos", label: "Favoritos" },
 ];
 
 const NAV_COMPANY: NavItem[] = [
   { to: "/profissionais-ativos", label: "Profissionais" },
   { to: "/vagas", label: "Vagas" },
   { to: "/feed", label: "Feed" },
+  { to: "/favoritos", label: "Favoritos" },
 ];
 
 const NAV_ADMIN: NavItem[] = [

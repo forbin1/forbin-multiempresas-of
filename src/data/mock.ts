@@ -154,7 +154,7 @@ export const POSTS: Post[] = [
     avatar: "CM",
     time: "Há 2h",
     content:
-      "Mais um dia concluído com sucesso! Nossa equipe garantiu a segurança de um evento corporativo com mais de 500 convidados. Disciplina e treinamento fazem toda a diferença. 🛡️",
+      "Mais um dia concluído com sucesso! Nossa equipe garantiu a segurança de um evento corporativo com mais de 500 convidados. Parabéns @renata.oliveira pela operação impecável no monitoramento. 🛡️",
     likes: 124,
     comments: 18,
     type: "text",

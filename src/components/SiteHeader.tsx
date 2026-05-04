@@ -154,58 +154,63 @@ export function SiteHeader() {
           ) : null}
         </div>
 
-        <button
-          aria-label="Abrir menu"
-          onClick={() => setOpen((v) => !v)}
-          className="ml-auto rounded-full border border-border p-2 lg:hidden"
-        >
-          <Menu className="h-5 w-5" />
-        </button>
-      </div>
-
-      {open && (
-        <div className="border-t border-border/60 bg-background lg:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4">
-            {nav.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-4 py-3 text-base text-muted-foreground hover:bg-accent hover:text-foreground"
-                activeProps={{ className: "text-primary bg-accent" }}
-                activeOptions={{ exact: item.to === "/" }}
-              >
-                {item.label}
-              </Link>
-            ))}
-            {user && (
-              <Link
-                to={dashboardLink}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-4 py-3 text-base text-muted-foreground hover:bg-accent hover:text-foreground"
-              >
-                {dashboardLabel}
-              </Link>
-            )}
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              {user ? (
-                <Button onClick={handleSignOut} variant="outline" className="col-span-2 rounded-full">
-                  <LogOut className="mr-2 h-4 w-4" /> Sair
-                </Button>
-              ) : (
-                <>
-                  <Button asChild variant="outline" className="rounded-full">
-                    <Link to="/login">Entrar</Link>
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <button
+              aria-label="Abrir menu"
+              className="ml-auto rounded-full border border-border p-2 lg:hidden"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[85vw] max-w-sm overflow-y-auto p-0">
+            <div className="flex h-full flex-col">
+              <div className="border-b border-border/60 px-6 py-5">
+                <Logo />
+              </div>
+              <nav className="flex flex-1 flex-col gap-1 px-4 py-4">
+                {nav.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-4 py-3 text-base text-muted-foreground hover:bg-accent hover:text-foreground"
+                    activeProps={{ className: "text-primary bg-accent" }}
+                    activeOptions={{ exact: item.to === "/" }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                {user && (
+                  <Link
+                    to={dashboardLink}
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-4 py-3 text-base text-muted-foreground hover:bg-accent hover:text-foreground"
+                  >
+                    {dashboardLabel}
+                  </Link>
+                )}
+              </nav>
+              <div className="border-t border-border/60 p-4">
+                {user ? (
+                  <Button onClick={handleSignOut} variant="outline" className="w-full rounded-full">
+                    <LogOut className="mr-2 h-4 w-4" /> Sair
                   </Button>
-                  <Button asChild className="rounded-full bg-primary text-primary-foreground">
-                    <Link to="/planos">Cadastrar</Link>
-                  </Button>
-                </>
-              )}
+                ) : (
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button asChild variant="outline" className="rounded-full" onClick={() => setOpen(false)}>
+                      <Link to="/login">Entrar</Link>
+                    </Button>
+                    <Button asChild className="rounded-full bg-primary text-primary-foreground" onClick={() => setOpen(false)}>
+                      <Link to="/planos">Cadastrar</Link>
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
-          </nav>
-        </div>
-      )}
+          </SheetContent>
+        </Sheet>
+      </div>
     </header>
   );
 }

@@ -233,6 +233,7 @@ function JobDetail() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      </div>
     </div>
   );
 }

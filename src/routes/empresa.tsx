@@ -145,8 +145,8 @@ function PainelEmpresa() {
           <div className="rounded-2xl border border-primary/40 bg-gradient-to-br from-primary/15 to-transparent p-6">
             <h3 className="font-display text-lg font-bold">Plano Premium</h3>
             <p className="mt-1 text-sm text-muted-foreground">Vagas ilimitadas, destaque no marketplace e selo verificado.</p>
-            <Button className="mt-4 w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
-              Conhecer planos
+            <Button asChild className="mt-4 w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link to="/planos">Conhecer planos</Link>
             </Button>
           </div>
 

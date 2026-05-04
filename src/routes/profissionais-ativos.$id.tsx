@@ -1,5 +1,6 @@
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
-import { MessageCircle, MapPin, ArrowLeft, Award } from "lucide-react";
+import { MapPin, ArrowLeft, Award } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
@@ -48,7 +49,7 @@ function PerfilProfissional() {
           </div>
           <Button asChild className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
             <a href={`https://wa.me/${p.whatsapp}`} target="_blank" rel="noreferrer">
-              <MessageCircle className="mr-2 h-4 w-4" /> Enviar mensagem
+              <WhatsAppIcon className="mr-2 h-4 w-4 text-white" /> WhatsApp
             </a>
           </Button>
         </div>

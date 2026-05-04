@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, MapPin, MessageCircle, Building2, Shield } from "lucide-react";
+import { Heart, MapPin, Building2, Shield } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/hooks/use-favorites";
 import { PROFILES } from "@/data/profiles";
@@ -85,7 +86,7 @@ function Grid({ items, onRemove }: { items: typeof PROFILES; onRemove: (id: stri
           <div className="mt-4 flex gap-2">
             {p.whatsapp && (
               <Button asChild size="sm" className="flex-1 rounded-full bg-[#25D366] text-white hover:bg-[#1ebe5a]">
-                <a href={`https://wa.me/${p.whatsapp}`} target="_blank" rel="noreferrer"><MessageCircle className="mr-1.5 h-4 w-4" /> WhatsApp</a>
+                <a href={`https://wa.me/${p.whatsapp}`} target="_blank" rel="noreferrer"><WhatsAppIcon className="mr-1.5 h-4 w-4 text-white" /> WhatsApp</a>
               </Button>
             )}
             <Button size="sm" variant="outline" className="flex-1 rounded-full" onClick={() => onRemove(p.id, p.kind)}>

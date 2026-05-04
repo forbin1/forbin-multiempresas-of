@@ -43,6 +43,7 @@ const NAV_ADMIN: NavItem[] = [
   { to: "/profissionais-ativos", label: "Profissionais" },
   { to: "/feed", label: "Feed" },
   { to: "/cursos", label: "Cursos" },
+  { to: "/favoritos", label: "Favoritos" },
 ];
 
 export function SiteHeader() {

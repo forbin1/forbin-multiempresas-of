@@ -107,27 +107,33 @@ function JobDetail() {
       <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
         {/* Coluna principal */}
         <div className="space-y-6">
-          <div className="rounded-3xl border border-border/60 bg-card p-8">
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/15 text-2xl font-bold text-primary">
-                  {job.companyInitials}
+          <div className="rounded-3xl border border-border/60 bg-card p-6 sm:p-8">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex items-start gap-4">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-primary/30 bg-primary/10 text-lg font-bold text-primary sm:h-20 sm:w-20 sm:text-xl">
+                  {(job as any).logo ? (
+                    <img src={(job as any).logo} alt={job.company} className="h-full w-full object-cover" />
+                  ) : (
+                    job.companyInitials
+                  )}
                 </div>
-                <div>
-                  <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">{job.title}</h1>
-                  <p className="mt-1 text-muted-foreground">{job.company}</p>
+                <div className="min-w-0 flex-1">
+                  <h1 className="font-display text-xl font-semibold leading-snug tracking-tight sm:text-2xl lg:text-3xl">
+                    {job.title}
+                  </h1>
+                  <p className="mt-1 text-sm text-muted-foreground sm:text-base">{job.company}</p>
+                  <Badge className="mt-3 inline-flex rounded-full border-success/40 bg-success/15 text-xs text-success">
+                    <ShieldCheck className="mr-1 h-3.5 w-3.5" /> Empresa verificada
+                  </Badge>
                 </div>
               </div>
-              <Badge className="rounded-full border-success/40 bg-success/15 text-success">
-                <ShieldCheck className="mr-1 h-3.5 w-3.5" /> Empresa verificada
-              </Badge>
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Chip icon={<MapPin className="h-4 w-4" />}>{job.location}</Chip>
-              <Chip icon={<Clock className="h-4 w-4" />}>{job.shift}</Chip>
-              <Chip icon={<BadgeDollarSign className="h-4 w-4" />}>{job.salary}</Chip>
-              <Chip icon={<Building2 className="h-4 w-4" />}>{job.type}</Chip>
+            <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              <InfoTile icon={<MapPin className="h-4 w-4" />} label="Local" value={job.location} />
+              <InfoTile icon={<Clock className="h-4 w-4" />} label="Jornada" value={job.shift} />
+              <InfoTile icon={<BadgeDollarSign className="h-4 w-4" />} label="Salário" value={job.salary} />
+              <InfoTile icon={<Building2 className="h-4 w-4" />} label="Contrato" value={job.type} />
             </div>
           </div>
 
@@ -252,6 +258,18 @@ function Chip({ icon, children }: { icon: React.ReactNode; children: React.React
     <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface px-4 py-2 text-sm">
       <span className="text-primary">{icon}</span>
       <span>{children}</span>
+    </div>
+  );
+}
+
+function InfoTile({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-border/60 bg-surface px-3 py-3">
+      <div className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+        <span className="text-primary">{icon}</span>
+        {label}
+      </div>
+      <div className="mt-1 text-sm font-semibold leading-tight text-foreground">{value}</div>
     </div>
   );
 }

@@ -121,8 +121,8 @@ function PerfilProfissional() {
 
               <TabsContent value="feed" className="mt-6 space-y-6">
                 <ComposeBox />
-                {POSTS.slice(0, 3).map((p) => (
-                  <PostCard key={p.id} post={p} />
+                {POSTS.slice(0, 3).map((p, i) => (
+                  <PostCard key={p.id} post={p} owned={i === 0} />
                 ))}
               </TabsContent>
 

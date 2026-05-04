@@ -106,14 +106,28 @@ function PerfilProfissional() {
               <Button variant="outline" className="h-12 rounded-full">
                 <Heart className="mr-2 h-5 w-5" /> Salvar
               </Button>
+              <Button variant="outline" size="icon" className="h-12 w-12 rounded-full" title="Compartilhar">
+                <Share2 className="h-5 w-5" />
+              </Button>
+              <Button variant="outline" size="icon" className="h-12 w-12 rounded-full" title="Baixar currículo">
+                <Download className="h-5 w-5" />
+              </Button>
             </div>
           </div>
 
+          {/* Redes / links rápidos */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            <SocialChip icon={Linkedin} label="LinkedIn" />
+            <SocialChip icon={Instagram} label="@carlos.vigilante" />
+            <SocialChip icon={Globe} label="carlosmendes.com.br" />
+          </div>
+
           {/* Mini stats */}
-          <div className="mt-8 grid grid-cols-3 gap-3 border-t border-border/60 pt-6">
+          <div className="mt-6 grid grid-cols-2 gap-3 border-t border-border/60 pt-6 sm:grid-cols-4">
             <Stat label="Cursos" value="7" />
             <Stat label="Anos de experiência" value="8" />
             <Stat label="Postos atendidos" value="23" />
+            <Stat label="Avaliação" value="4.9 ★" />
           </div>
         </div>
 

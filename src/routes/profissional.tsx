@@ -83,17 +83,20 @@ function PerfilProfissional() {
                 <span className="flex items-center gap-1.5"><Phone className="h-4 w-4 text-primary" /> (11) 99999-0000</span>
               </div>
             </div>
-            <div className="flex gap-3">
-              <Button variant="outline" className="h-12 rounded-full">Mensagem</Button>
-              <Button className="h-12 rounded-full bg-primary px-6 font-semibold text-primary-foreground shadow-gold hover:bg-primary/90">
-                Conectar
+            <div className="flex flex-wrap gap-3">
+              <Button asChild className="h-12 rounded-full bg-[#25D366] px-6 font-semibold text-white hover:bg-[#1ebe5a]">
+                <a href="https://wa.me/5511999990000" target="_blank" rel="noreferrer">
+                  <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
+                </a>
+              </Button>
+              <Button variant="outline" className="h-12 rounded-full">
+                <Heart className="mr-2 h-5 w-5" /> Salvar
               </Button>
             </div>
           </div>
 
           {/* Mini stats */}
-          <div className="mt-8 grid grid-cols-2 gap-3 border-t border-border/60 pt-6 sm:grid-cols-4">
-            <Stat label="Conexões" value="486" />
+          <div className="mt-8 grid grid-cols-3 gap-3 border-t border-border/60 pt-6">
             <Stat label="Cursos" value="7" />
             <Stat label="Anos de experiência" value="8" />
             <Stat label="Postos atendidos" value="23" />

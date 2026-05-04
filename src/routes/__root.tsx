@@ -1,4 +1,4 @@
-import { Outlet, createRootRoute, HeadContent, Scripts, Link } from "@tanstack/react-router";
+import { Outlet, createRootRoute, HeadContent, Scripts, Link, useLocation } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -75,14 +75,16 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const { pathname } = useLocation();
+  const isAuthScreen = pathname === "/login";
   return (
     <AuthProvider>
       <div className="flex min-h-screen flex-col bg-background text-foreground">
-        <SiteHeader />
+        {!isAuthScreen && <SiteHeader />}
         <main className="flex-1">
           <Outlet />
         </main>
-        <SiteFooter />
+        {!isAuthScreen && <SiteFooter />}
         <Toaster theme="dark" richColors position="top-center" />
       </div>
     </AuthProvider>

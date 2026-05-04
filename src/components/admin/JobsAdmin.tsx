@@ -128,55 +128,62 @@ export function JobsAdmin() {
         </div>
       ) : (
         <div className="overflow-hidden rounded-2xl border border-border/60 bg-card">
-          <table className="w-full text-sm">
-            <thead className="border-b border-border/60 text-left text-xs uppercase tracking-wider text-muted-foreground">
-              <tr>
-                <th className="px-4 py-3">Título</th>
-                <th className="px-4 py-3">Local</th>
-                <th className="px-4 py-3">Modalidade</th>
-                <th className="px-4 py-3">Salário</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3 text-right">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((j) => (
-                <tr key={j.id} className="border-b border-border/40 last:border-0">
-                  <td className="px-4 py-3 font-medium">{j.title}</td>
-                  <td className="px-4 py-3 text-muted-foreground">
-                    {[j.city, j.state].filter(Boolean).join(" / ") || "—"}
-                  </td>
-                  <td className="px-4 py-3 text-muted-foreground">{j.modality}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{fmtSalary(j)}</td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={
-                        "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs " +
-                        (j.is_published
-                          ? "bg-emerald-500/15 text-emerald-400"
-                          : "bg-muted text-muted-foreground")
-                      }
-                    >
-                      {j.is_published ? "Publicada" : "Oculta"}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex justify-end gap-1">
-                      <Button size="icon" variant="ghost" onClick={() => togglePublished(j)}>
-                        {j.is_published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </Button>
-                      <Button size="icon" variant="ghost" onClick={() => setEditing(j)}>
-                        <Pencil className="h-4 w-4" />
-                      </Button>
-                      <Button size="icon" variant="ghost" onClick={() => setDeleteId(j.id)}>
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    </div>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[700px] text-sm">
+              <thead className="border-b border-border/60 text-left text-xs uppercase tracking-wider text-muted-foreground">
+                <tr>
+                  <th className="px-4 py-3">Título</th>
+                  <th className="hidden px-4 py-3 sm:table-cell">Local</th>
+                  <th className="hidden px-4 py-3 md:table-cell">Modalidade</th>
+                  <th className="hidden px-4 py-3 md:table-cell">Salário</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3 text-right">Ações</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {items.map((j) => (
+                  <tr key={j.id} className="border-b border-border/40 last:border-0">
+                    <td className="px-4 py-3 font-medium">
+                      <div className="truncate">{j.title}</div>
+                      <div className="text-xs text-muted-foreground sm:hidden">
+                        {[j.city, j.state].filter(Boolean).join(" / ") || "—"} · {j.modality}
+                      </div>
+                    </td>
+                    <td className="hidden px-4 py-3 text-muted-foreground sm:table-cell">
+                      {[j.city, j.state].filter(Boolean).join(" / ") || "—"}
+                    </td>
+                    <td className="hidden px-4 py-3 text-muted-foreground md:table-cell">{j.modality}</td>
+                    <td className="hidden px-4 py-3 text-muted-foreground md:table-cell">{fmtSalary(j)}</td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={
+                          "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs " +
+                          (j.is_published
+                            ? "bg-emerald-500/15 text-emerald-400"
+                            : "bg-muted text-muted-foreground")
+                        }
+                      >
+                        {j.is_published ? "Publicada" : "Oculta"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex justify-end gap-1">
+                        <Button size="icon" variant="ghost" onClick={() => togglePublished(j)}>
+                          {j.is_published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </Button>
+                        <Button size="icon" variant="ghost" onClick={() => setEditing(j)}>
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon" variant="ghost" onClick={() => setDeleteId(j.id)}>
+                          <Trash2 className="h-4 w-4 text-destructive" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

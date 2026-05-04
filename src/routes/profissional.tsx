@@ -293,14 +293,21 @@ export function PostCard({ post, owned = false }: { post: typeof POSTS[number]; 
 
   if (deleted) return null;
 
+  const handle = post.author.toLowerCase().replace(/\s+/g, ".");
   return (
     <article className="rounded-2xl border border-border/60 bg-card p-4 sm:p-6">
       <header className="flex items-center gap-3">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-gold font-bold text-primary-foreground">
+        <Link
+          to="/u/$handle"
+          params={{ handle }}
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-gold font-bold text-primary-foreground transition hover:opacity-90"
+        >
           {post.avatar}
-        </div>
+        </Link>
         <div className="min-w-0 flex-1">
-          <p className="truncate font-semibold">{post.author}</p>
+          <Link to="/u/$handle" params={{ handle }} className="block truncate font-semibold hover:underline">
+            {post.author}
+          </Link>
           <p className="truncate text-xs text-muted-foreground">{post.role} · {post.time}</p>
         </div>
         {owned && (

@@ -75,20 +75,20 @@ function CursosPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
           </div>
-          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 lg:p-16">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-primary">
+          <div className="absolute bottom-0 left-0 right-0 px-4 py-5 text-left sm:p-10 lg:p-16">
+            <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-primary sm:text-xs">
               Área de Membros
             </p>
-            <h1 className="font-display text-2xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+            <h1 className="font-display text-base font-bold leading-tight sm:text-4xl lg:text-5xl">
               FORBIN MultiEmpresas
             </h1>
-            <p className="mt-2 max-w-xl text-sm text-white/70 sm:text-base">
+            <p className="mt-1 max-w-xl text-[11px] leading-snug text-white/70 sm:mt-2 sm:text-base">
               Capacite-se com os melhores cursos de segurança privada. Certificado FORBIN incluso.
             </p>
             <Link
               to="/cursos/$courseId"
               params={{ courseId: heroCourse.id }}
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+              className="mt-3 inline-flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:mt-4 sm:px-5 sm:py-2.5 sm:text-sm"
             >
               Começar agora
             </Link>

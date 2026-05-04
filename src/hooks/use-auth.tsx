@@ -34,23 +34,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
+      (_event, session) => {
         const user = session?.user ?? null;
-        let role: string | null = null;
+        // Atualiza estado imediatamente — NÃO use await aqui (deadlock do Supabase)
+        setState((prev) => ({ user, session, loading: false, role: prev.role }));
         if (user) {
-          role = await fetchRole(user.id);
+          // Busca role de forma diferida (fire-and-forget)
+          setTimeout(() => {
+            fetchRole(user.id).then((role) => {
+              setState((prev) => ({ ...prev, role }));
+            });
+          }, 0);
+        } else {
+          setState((prev) => ({ ...prev, role: null }));
         }
-        setState({ user, session, loading: false, role });
       }
     );
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
       const user = session?.user ?? null;
-      let role: string | null = null;
+      setState((prev) => ({ user, session, loading: false, role: prev.role }));
       if (user) {
-        role = await fetchRole(user.id);
+        fetchRole(user.id).then((role) => {
+          setState((prev) => ({ ...prev, role }));
+        });
       }
-      setState({ user, session, loading: false, role });
     });
 
     return () => subscription.unsubscribe();

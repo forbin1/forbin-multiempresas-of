@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Award, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { AdminPageHeader, AdminPlaceholder } from "@/components/admin/AdminPageHeader";
+import { Award } from "lucide-react";
+import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
+import { CertificatesAdmin } from "@/components/admin/CertificatesAdmin";
 
 export const Route = createFileRoute("/admin/certificados")({
   component: () => (
@@ -10,10 +10,9 @@ export const Route = createFileRoute("/admin/certificados")({
         icon={Award}
         eyebrow="Conquistas"
         title="Certificados"
-        description="Editar, excluir, adicionar e ocultar modelos de certificados exibidos para profissionais que concluíram cursos."
-        actions={<Button className="rounded-full"><Plus className="mr-2 h-4 w-4" /> Novo modelo</Button>}
+        description="Modelos de certificados exibidos para profissionais que concluíram cursos."
       />
-      <AdminPlaceholder note="Galeria de modelos de certificados será implementada na próxima etapa." />
+      <CertificatesAdmin />
     </div>
   ),
 });

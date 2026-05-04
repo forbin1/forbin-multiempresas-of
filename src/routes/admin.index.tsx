@@ -24,6 +24,8 @@ type Stats = {
   courses: number;
   certificates: number;
   enrollments: number;
+  professionalPriceCents: number;
+  companyPriceCents: number;
 };
 
 function AdminDashboard() {
@@ -33,21 +35,33 @@ function AdminDashboard() {
   useEffect(() => {
     const load = async () => {
       const head = { count: "exact" as const, head: true };
-      const [p, c, j, co, ce, en] = await Promise.all([
+      const [p, c, j, co, ce, en, plansRes] = await Promise.all([
         supabase.from("profiles").select("*", head),
         supabase.from("companies").select("*", head),
-        supabase.from("user_roles").select("*", head).eq("role", "professional"),
+        supabase.from("jobs").select("*", head).eq("is_published", true),
         supabase.from("courses").select("*", head),
         supabase.from("certificates").select("*", head),
         supabase.from("enrollments").select("*", head),
+        supabase
+          .from("plans")
+          .select("audience, price_cents, sort_order")
+          .eq("is_published", true)
+          .order("sort_order", { ascending: true }),
       ]);
+
+      const plans = plansRes.data ?? [];
+      const proPlan = plans.find((pl) => pl.audience === "professional");
+      const compPlan = plans.find((pl) => pl.audience === "company");
+
       setStats({
         professionals: p.count ?? 0,
         companies: c.count ?? 0,
-        jobs: j.count ?? 0, // placeholder até existir tabela jobs
+        jobs: j.count ?? 0,
         courses: co.count ?? 0,
         certificates: ce.count ?? 0,
         enrollments: en.count ?? 0,
+        professionalPriceCents: proPlan?.price_cents ?? 0,
+        companyPriceCents: compPlan?.price_cents ?? 0,
       });
       setLoading(false);
     };
@@ -57,9 +71,9 @@ function AdminDashboard() {
   const fmtBRL = (n: number) =>
     new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(n);
 
-  // Placeholder de receita até integrar Stripe
-  const monthly =
-    (stats?.professionals ?? 0) * 19.9 + (stats?.companies ?? 0) * 297.9;
+  const proRevenue = ((stats?.professionals ?? 0) * (stats?.professionalPriceCents ?? 0)) / 100;
+  const compRevenue = ((stats?.companies ?? 0) * (stats?.companyPriceCents ?? 0)) / 100;
+  const monthly = proRevenue + compRevenue;
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
@@ -75,8 +89,20 @@ function AdminDashboard() {
           icon={CreditCard}
           label="Receita mensal estimada"
           value={loading ? "—" : fmtBRL(monthly)}
-          hint="Baseada em assinantes ativos"
+          hint="Profissionais + Empresas"
           highlight
+        />
+        <Card
+          icon={Users}
+          label="Receita — Profissionais"
+          value={loading ? "—" : fmtBRL(proRevenue)}
+          hint={`${stats?.professionals ?? 0} × ${fmtBRL((stats?.professionalPriceCents ?? 0) / 100)}`}
+        />
+        <Card
+          icon={Building2}
+          label="Receita — Empresas"
+          value={loading ? "—" : fmtBRL(compRevenue)}
+          hint={`${stats?.companies ?? 0} × ${fmtBRL((stats?.companyPriceCents ?? 0) / 100)}`}
         />
         <Card
           icon={Users}
@@ -103,7 +129,6 @@ function AdminDashboard() {
           icon={Briefcase}
           label="Vagas ativas"
           value={loading ? "—" : String(stats?.jobs ?? 0)}
-          hint="Em breve"
         />
         <Card
           icon={GraduationCap}

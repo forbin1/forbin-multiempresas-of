@@ -270,7 +270,8 @@ function JobDialog({
             <Input value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="Ex.: Vigilante Noturno" />
           </Field>
           <Field label="Descrição">
-            <Textarea rows={4} value={form.description ?? ""} onChange={(e) => set("description", e.target.value)} />
+            <AIDescriptionHelper form={form} onApply={(text) => set("description", text)} />
+            <Textarea rows={6} value={form.description ?? ""} onChange={(e) => set("description", e.target.value)} />
           </Field>
 
           <div className="grid gap-4 sm:grid-cols-2">

@@ -195,6 +195,88 @@ function PainelEmpresa() {
                 </div>
               ))}
             </TabsContent>
+
+            <TabsContent value="sobre" className="mt-6 space-y-6">
+              <div className="rounded-2xl border border-border/60 bg-card p-6">
+                <h2 className="font-display text-xl font-bold">Sobre a empresa</h2>
+                <p className="mt-3 leading-relaxed text-muted-foreground">
+                  Fundada em 2007, a Vigilância Total LTDA atua na proteção de patrimônios e pessoas
+                  com equipe própria altamente treinada. Investimos continuamente em tecnologia e
+                  capacitação para entregar excelência operacional e tranquilidade aos nossos clientes.
+                </p>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {[
+                    ["Fundação", "2007"],
+                    ["Funcionários", "+450"],
+                    ["Cidades atendidas", "12"],
+                    ["Frota", "38 veículos"],
+                    ["Postos ativos", "62"],
+                    ["ISO 9001", "Certificada"],
+                  ].map(([k, v]) => (
+                    <div key={k} className="rounded-xl border border-border/60 bg-surface p-4">
+                      <p className="text-xs uppercase tracking-wide text-muted-foreground">{k}</p>
+                      <p className="mt-1 font-semibold">{v}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-border/60 bg-card p-6">
+                <h2 className="font-display text-xl font-bold">Serviços oferecidos</h2>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {[
+                    "Vigilância patrimonial 24h",
+                    "Portaria e controle de acesso",
+                    "Escolta armada",
+                    "Segurança em eventos",
+                    "Operação e instalação de CFTV",
+                    "Consultoria em segurança",
+                  ].map((s) => (
+                    <li key={s} className="flex items-center gap-2 rounded-xl border border-border/60 bg-surface p-3 text-sm">
+                      <CheckCircle2 className="h-4 w-4 text-success" /> {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-border/60 bg-card p-6">
+                <h2 className="font-display text-xl font-bold">Certificações & autorizações</h2>
+                <ul className="mt-4 space-y-3">
+                  {[
+                    { name: "Autorização Polícia Federal", id: "Nº 12.345/SP" },
+                    { name: "ISO 9001:2015", id: "Gestão da qualidade" },
+                    { name: "Sindesp-SP", id: "Filiada desde 2010" },
+                    { name: "Certificado Origem", id: "Empresa nacional" },
+                  ].map((c) => (
+                    <li key={c.name} className="flex items-start gap-3 rounded-xl border border-border/60 bg-surface p-3">
+                      <Award className="mt-0.5 h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm font-semibold">{c.name}</p>
+                        <p className="text-xs text-muted-foreground">{c.id}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-border/60 bg-card p-6">
+                <h2 className="font-display text-xl font-bold">Endereço & redes</h2>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Av. Paulista, 1.500 — Bela Vista, São Paulo/SP · CEP 01310-200
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <a className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface px-4 py-2 text-sm hover:border-primary" href="#">
+                    <Linkedin className="h-4 w-4 text-primary" /> /vigilancia-total
+                  </a>
+                  <a className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface px-4 py-2 text-sm hover:border-primary" href="#">
+                    <Instagram className="h-4 w-4 text-primary" /> @vigilanciatotal
+                  </a>
+                  <a className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface px-4 py-2 text-sm hover:border-primary" href="#">
+                    <Globe className="h-4 w-4 text-primary" /> vigilanciatotal.com.br
+                  </a>
+                </div>
+              </div>
+            </TabsContent>
           </Tabs>
         </div>
 

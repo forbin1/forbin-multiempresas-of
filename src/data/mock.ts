@@ -131,7 +131,7 @@ export const JOBS: Job[] = ([
     requirements: ["Curso de Porteiro", "Ensino médio completo"],
     benefits: ["Vale alimentação", "Vale transporte", "Plano odontológico"],
   },
-];
+] as Omit<Job, "cover">[]).map((j, i) => ({ ...j, cover: COVERS[i % COVERS.length] }));
 
 export type Post = {
   id: string;

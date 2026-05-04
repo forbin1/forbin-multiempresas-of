@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RevisorCurriculoRouteImport } from './routes/revisor-curriculo'
 import { Route as ProfissionalRouteImport } from './routes/profissional'
 import { Route as ProfissionaisAtivosRouteImport } from './routes/profissionais-ativos'
 import { Route as PlanosRouteImport } from './routes/planos'
@@ -38,6 +39,11 @@ import { Route as AdminExperienciasRouteImport } from './routes/admin.experienci
 import { Route as AdminCursosRouteImport } from './routes/admin.cursos'
 import { Route as AdminCertificadosRouteImport } from './routes/admin.certificados'
 
+const RevisorCurriculoRoute = RevisorCurriculoRouteImport.update({
+  id: '/revisor-curriculo',
+  path: '/revisor-curriculo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfissionalRoute = ProfissionalRouteImport.update({
   id: '/profissional',
   path: '/profissional',
@@ -194,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/planos': typeof PlanosRoute
   '/profissionais-ativos': typeof ProfissionaisAtivosRouteWithChildren
   '/profissional': typeof ProfissionalRoute
+  '/revisor-curriculo': typeof RevisorCurriculoRoute
   '/admin/certificados': typeof AdminCertificadosRoute
   '/admin/cursos': typeof AdminCursosRoute
   '/admin/experiencias': typeof AdminExperienciasRoute
@@ -223,6 +230,7 @@ export interface FileRoutesByTo {
   '/planos': typeof PlanosRoute
   '/profissionais-ativos': typeof ProfissionaisAtivosRouteWithChildren
   '/profissional': typeof ProfissionalRoute
+  '/revisor-curriculo': typeof RevisorCurriculoRoute
   '/admin/certificados': typeof AdminCertificadosRoute
   '/admin/cursos': typeof AdminCursosRoute
   '/admin/experiencias': typeof AdminExperienciasRoute
@@ -254,6 +262,7 @@ export interface FileRoutesById {
   '/planos': typeof PlanosRoute
   '/profissionais-ativos': typeof ProfissionaisAtivosRouteWithChildren
   '/profissional': typeof ProfissionalRoute
+  '/revisor-curriculo': typeof RevisorCurriculoRoute
   '/admin/certificados': typeof AdminCertificadosRoute
   '/admin/cursos': typeof AdminCursosRoute
   '/admin/experiencias': typeof AdminExperienciasRoute
@@ -286,6 +295,7 @@ export interface FileRouteTypes {
     | '/planos'
     | '/profissionais-ativos'
     | '/profissional'
+    | '/revisor-curriculo'
     | '/admin/certificados'
     | '/admin/cursos'
     | '/admin/experiencias'
@@ -315,6 +325,7 @@ export interface FileRouteTypes {
     | '/planos'
     | '/profissionais-ativos'
     | '/profissional'
+    | '/revisor-curriculo'
     | '/admin/certificados'
     | '/admin/cursos'
     | '/admin/experiencias'
@@ -345,6 +356,7 @@ export interface FileRouteTypes {
     | '/planos'
     | '/profissionais-ativos'
     | '/profissional'
+    | '/revisor-curriculo'
     | '/admin/certificados'
     | '/admin/cursos'
     | '/admin/experiencias'
@@ -376,6 +388,7 @@ export interface RootRouteChildren {
   PlanosRoute: typeof PlanosRoute
   ProfissionaisAtivosRoute: typeof ProfissionaisAtivosRouteWithChildren
   ProfissionalRoute: typeof ProfissionalRoute
+  RevisorCurriculoRoute: typeof RevisorCurriculoRoute
   UHandleRoute: typeof UHandleRoute
   VagasJobIdRoute: typeof VagasJobIdRoute
   VagasIndexRoute: typeof VagasIndexRoute
@@ -383,6 +396,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/revisor-curriculo': {
+      id: '/revisor-curriculo'
+      path: '/revisor-curriculo'
+      fullPath: '/revisor-curriculo'
+      preLoaderRoute: typeof RevisorCurriculoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profissional': {
       id: '/profissional'
       path: '/profissional'
@@ -645,6 +665,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlanosRoute: PlanosRoute,
   ProfissionaisAtivosRoute: ProfissionaisAtivosRouteWithChildren,
   ProfissionalRoute: ProfissionalRoute,
+  RevisorCurriculoRoute: RevisorCurriculoRoute,
   UHandleRoute: UHandleRoute,
   VagasJobIdRoute: VagasJobIdRoute,
   VagasIndexRoute: VagasIndexRoute,

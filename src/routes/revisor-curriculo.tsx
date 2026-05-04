@@ -211,7 +211,6 @@ async function extractPdfText(file: File): Promise<string> {
   // Lazy-load pdfjs no cliente
   const pdfjs = await import("pdfjs-dist");
   // worker via CDN para evitar problemas de bundling
-  // @ts-expect-error - GlobalWorkerOptions é exposto pelo pdfjs
   pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
   const buf = await file.arrayBuffer();
   const doc = await pdfjs.getDocument({ data: buf }).promise;
@@ -220,7 +219,9 @@ async function extractPdfText(file: File): Promise<string> {
   for (let i = 1; i <= pages; i++) {
     const page = await doc.getPage(i);
     const content = await page.getTextContent();
-    const strings = content.items.map((it: { str?: string }) => it.str ?? "").join(" ");
+    const strings = content.items
+      .map((it) => ("str" in it ? it.str : ""))
+      .join(" ");
     out += strings + "\n\n";
   }
   return out.trim();

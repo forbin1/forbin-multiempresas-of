@@ -248,7 +248,11 @@ function VagasPage() {
                   </div>
                 </div>
               </Link>
-              {(idx + 1) % 6 === 0 && <AdBanner ad={ADS[Math.floor(idx / 6) % ADS.length]} />}
+              {(idx + 1) % 5 === 0 && (
+                <div className="md:col-span-2 lg:col-span-3">
+                  <AdBanner ad={ADS[Math.floor(idx / 5) % ADS.length]} />
+                </div>
+              )}
             </Fragment>
           ))}
         </div>

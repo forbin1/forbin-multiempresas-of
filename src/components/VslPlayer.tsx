@@ -75,8 +75,7 @@ export function VslPlayer() {
           autoPlay
           muted={muted}
           playsInline
-          // @ts-expect-error atributo não-padrão para iOS Safari
-          webkit-playsinline="true"
+          {...({ "webkit-playsinline": "true" } as Record<string, string>)}
           controls={false}
           disablePictureInPicture
           controlsList="nodownload noplaybackrate nofullscreen"

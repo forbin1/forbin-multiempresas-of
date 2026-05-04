@@ -13,7 +13,7 @@ import {
   FileText,
   Heart,
   MessageCircle,
-  Share2,
+  CheckCircle2,
   CheckCircle2,
   MoreHorizontal,
   Pencil,

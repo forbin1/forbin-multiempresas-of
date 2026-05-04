@@ -17,6 +17,7 @@ import { Route as FeedRouteImport } from './routes/feed'
 import { Route as EmpresaRouteImport } from './routes/empresa'
 import { Route as CursosRouteImport } from './routes/cursos'
 import { Route as CertificadosRouteImport } from './routes/certificados'
+import { Route as CandidaturasRouteImport } from './routes/candidaturas'
 import { Route as CadastroEmpresaRouteImport } from './routes/cadastro-empresa'
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -66,6 +67,11 @@ const CertificadosRoute = CertificadosRouteImport.update({
   path: '/certificados',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CandidaturasRoute = CandidaturasRouteImport.update({
+  id: '/candidaturas',
+  path: '/candidaturas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CadastroEmpresaRoute = CadastroEmpresaRouteImport.update({
   id: '/cadastro-empresa',
   path: '/cadastro-empresa',
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
+  '/candidaturas': typeof CandidaturasRoute
   '/certificados': typeof CertificadosRoute
   '/cursos': typeof CursosRouteWithChildren
   '/empresa': typeof EmpresaRoute
@@ -130,6 +137,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
+  '/candidaturas': typeof CandidaturasRoute
   '/certificados': typeof CertificadosRoute
   '/cursos': typeof CursosRouteWithChildren
   '/empresa': typeof EmpresaRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
+  '/candidaturas': typeof CandidaturasRoute
   '/certificados': typeof CertificadosRoute
   '/cursos': typeof CursosRouteWithChildren
   '/empresa': typeof EmpresaRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/cadastro'
     | '/cadastro-empresa'
+    | '/candidaturas'
     | '/certificados'
     | '/cursos'
     | '/empresa'
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/cadastro'
     | '/cadastro-empresa'
+    | '/candidaturas'
     | '/certificados'
     | '/cursos'
     | '/empresa'
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/cadastro'
     | '/cadastro-empresa'
+    | '/candidaturas'
     | '/certificados'
     | '/cursos'
     | '/empresa'
@@ -224,6 +236,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   CadastroRoute: typeof CadastroRoute
   CadastroEmpresaRoute: typeof CadastroEmpresaRoute
+  CandidaturasRoute: typeof CandidaturasRoute
   CertificadosRoute: typeof CertificadosRoute
   CursosRoute: typeof CursosRouteWithChildren
   EmpresaRoute: typeof EmpresaRoute
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       path: '/certificados'
       fullPath: '/certificados'
       preLoaderRoute: typeof CertificadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/candidaturas': {
+      id: '/candidaturas'
+      path: '/candidaturas'
+      fullPath: '/candidaturas'
+      preLoaderRoute: typeof CandidaturasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cadastro-empresa': {
@@ -380,6 +400,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   CadastroRoute: CadastroRoute,
   CadastroEmpresaRoute: CadastroEmpresaRoute,
+  CandidaturasRoute: CandidaturasRoute,
   CertificadosRoute: CertificadosRoute,
   CursosRoute: CursosRouteWithChildren,
   EmpresaRoute: EmpresaRoute,

@@ -164,12 +164,12 @@ export function PlansAdmin() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-muted-foreground">
           Os preços aparecem automaticamente na página{" "}
           <span className="font-mono">/planos</span>.
         </p>
-        <Button onClick={openNew}>
+        <Button onClick={openNew} className="w-full sm:w-auto">
           <Plus className="mr-2 h-4 w-4" /> Novo plano
         </Button>
       </div>
@@ -180,94 +180,106 @@ export function PlansAdmin() {
         </div>
       ) : (
         <div className="overflow-hidden rounded-2xl border border-border/60 bg-card">
-          <table className="w-full text-sm">
-            <thead className="bg-surface/40 text-left text-xs uppercase text-muted-foreground">
-              <tr>
-                <th className="px-4 py-3">Ordem</th>
-                <th className="px-4 py-3">Nome</th>
-                <th className="px-4 py-3">Público</th>
-                <th className="px-4 py-3">Preço</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3 text-right">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {plans.map((p) => (
-                <tr key={p.id} className="border-t border-border/60">
-                  <td className="px-4 py-3">{p.sort_order}</td>
-                  <td className="px-4 py-3 font-medium">
-                    <div className="flex items-center gap-2">
-                      {p.name}
-                      {p.highlight && (
-                        <Star className="h-3.5 w-3.5 fill-primary text-primary" />
-                      )}
-                    </div>
-                    <div className="text-xs text-muted-foreground">{p.slug}</div>
-                  </td>
-                  <td className="px-4 py-3">
-                    <Badge variant="outline">
-                      {p.audience === "company" ? "Empresa" : "Profissional"}
-                    </Badge>
-                  </td>
-                  <td className="px-4 py-3 font-mono">
-                    {formatBRL(p.price_cents)}
-                    <span className="text-xs text-muted-foreground">
-                      /{p.period === "month" ? "mês" : p.period}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    {p.is_published ? (
-                      <Badge className="bg-emerald-600/20 text-emerald-400">
-                        Publicado
-                      </Badge>
-                    ) : (
-                      <Badge variant="secondary">Oculto</Badge>
-                    )}
-                  </td>
-                  <td className="px-4 py-3 text-right">
-                    <div className="flex justify-end gap-1">
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        onClick={() => toggleVisible(p)}
-                        title={p.is_published ? "Ocultar" : "Publicar"}
-                      >
-                        {p.is_published ? (
-                          <EyeOff className="h-4 w-4" />
-                        ) : (
-                          <Eye className="h-4 w-4" />
-                        )}
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        onClick={() => openEdit(p)}
-                      >
-                        <Pencil className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        onClick={() => setToDelete(p)}
-                      >
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-              {plans.length === 0 && (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[680px] text-sm">
+              <thead className="bg-surface/40 text-left text-xs uppercase text-muted-foreground">
                 <tr>
-                  <td
-                    colSpan={6}
-                    className="px-4 py-12 text-center text-muted-foreground"
-                  >
-                    Nenhum plano cadastrado.
-                  </td>
+                  <th className="hidden px-4 py-3 sm:table-cell">Ordem</th>
+                  <th className="px-4 py-3">Nome</th>
+                  <th className="hidden px-4 py-3 md:table-cell">Público</th>
+                  <th className="px-4 py-3">Preço</th>
+                  <th className="hidden px-4 py-3 sm:table-cell">Status</th>
+                  <th className="px-4 py-3 text-right">Ações</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {plans.map((p) => (
+                  <tr key={p.id} className="border-t border-border/60">
+                    <td className="hidden px-4 py-3 sm:table-cell">{p.sort_order}</td>
+                    <td className="px-4 py-3 font-medium">
+                      <div className="flex items-center gap-2">
+                        <span className="truncate">{p.name}</span>
+                        {p.highlight && (
+                          <Star className="h-3.5 w-3.5 shrink-0 fill-primary text-primary" />
+                        )}
+                      </div>
+                      <div className="text-xs text-muted-foreground">{p.slug}</div>
+                      <div className="mt-1 flex flex-wrap gap-1 md:hidden">
+                        <Badge variant="outline" className="text-[10px]">
+                          {p.audience === "company" ? "Empresa" : "Profissional"}
+                        </Badge>
+                        {p.is_published ? (
+                          <Badge className="bg-emerald-600/20 text-[10px] text-emerald-400">Publicado</Badge>
+                        ) : (
+                          <Badge variant="secondary" className="text-[10px]">Oculto</Badge>
+                        )}
+                      </div>
+                    </td>
+                    <td className="hidden px-4 py-3 md:table-cell">
+                      <Badge variant="outline">
+                        {p.audience === "company" ? "Empresa" : "Profissional"}
+                      </Badge>
+                    </td>
+                    <td className="px-4 py-3 font-mono whitespace-nowrap">
+                      {formatBRL(p.price_cents)}
+                      <span className="text-xs text-muted-foreground">
+                        /{p.period === "month" ? "mês" : p.period}
+                      </span>
+                    </td>
+                    <td className="hidden px-4 py-3 sm:table-cell">
+                      {p.is_published ? (
+                        <Badge className="bg-emerald-600/20 text-emerald-400">
+                          Publicado
+                        </Badge>
+                      ) : (
+                        <Badge variant="secondary">Oculto</Badge>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-right">
+                      <div className="flex justify-end gap-1">
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          onClick={() => toggleVisible(p)}
+                          title={p.is_published ? "Ocultar" : "Publicar"}
+                        >
+                          {p.is_published ? (
+                            <EyeOff className="h-4 w-4" />
+                          ) : (
+                            <Eye className="h-4 w-4" />
+                          )}
+                        </Button>
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          onClick={() => openEdit(p)}
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          onClick={() => setToDelete(p)}
+                        >
+                          <Trash2 className="h-4 w-4 text-destructive" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                {plans.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={6}
+                      className="px-4 py-12 text-center text-muted-foreground"
+                    >
+                      Nenhum plano cadastrado.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

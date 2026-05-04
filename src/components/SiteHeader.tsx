@@ -18,6 +18,7 @@ const nav = [
   { to: "/vagas", label: "Vagas" },
   { to: "/cursos", label: "Cursos" },
   { to: "/feed", label: "Feed" },
+  { to: "/planos", label: "Planos" },
 ] as const;
 
 export function SiteHeader() {

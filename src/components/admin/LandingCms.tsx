@@ -247,13 +247,14 @@ function FieldRow({
         />
       ) : field.type === "image" ? (
         <div className="space-y-3">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={() => fileRef.current?.click()}
               disabled={uploading}
+              className="w-full sm:w-auto"
             >
               {uploading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

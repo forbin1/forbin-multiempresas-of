@@ -13,7 +13,6 @@ import { Route as ProfissionalRouteImport } from './routes/profissional'
 import { Route as ProfissionaisAtivosRouteImport } from './routes/profissionais-ativos'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as FerramentasIaRouteImport } from './routes/ferramentas-ia'
 import { Route as FeedRouteImport } from './routes/feed'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as EmpresaRouteImport } from './routes/empresa'
@@ -57,11 +56,6 @@ const PlanosRoute = PlanosRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FerramentasIaRoute = FerramentasIaRouteImport.update({
-  id: '/ferramentas-ia',
-  path: '/ferramentas-ia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeedRoute = FeedRouteImport.update({
@@ -196,7 +190,6 @@ export interface FileRoutesByFullPath {
   '/empresa': typeof EmpresaRoute
   '/favoritos': typeof FavoritosRoute
   '/feed': typeof FeedRoute
-  '/ferramentas-ia': typeof FerramentasIaRoute
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
   '/profissionais-ativos': typeof ProfissionaisAtivosRouteWithChildren
@@ -226,7 +219,6 @@ export interface FileRoutesByTo {
   '/empresa': typeof EmpresaRoute
   '/favoritos': typeof FavoritosRoute
   '/feed': typeof FeedRoute
-  '/ferramentas-ia': typeof FerramentasIaRoute
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
   '/profissionais-ativos': typeof ProfissionaisAtivosRouteWithChildren
@@ -258,7 +250,6 @@ export interface FileRoutesById {
   '/empresa': typeof EmpresaRoute
   '/favoritos': typeof FavoritosRoute
   '/feed': typeof FeedRoute
-  '/ferramentas-ia': typeof FerramentasIaRoute
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
   '/profissionais-ativos': typeof ProfissionaisAtivosRouteWithChildren
@@ -291,7 +282,6 @@ export interface FileRouteTypes {
     | '/empresa'
     | '/favoritos'
     | '/feed'
-    | '/ferramentas-ia'
     | '/login'
     | '/planos'
     | '/profissionais-ativos'
@@ -321,7 +311,6 @@ export interface FileRouteTypes {
     | '/empresa'
     | '/favoritos'
     | '/feed'
-    | '/ferramentas-ia'
     | '/login'
     | '/planos'
     | '/profissionais-ativos'
@@ -352,7 +341,6 @@ export interface FileRouteTypes {
     | '/empresa'
     | '/favoritos'
     | '/feed'
-    | '/ferramentas-ia'
     | '/login'
     | '/planos'
     | '/profissionais-ativos'
@@ -384,7 +372,6 @@ export interface RootRouteChildren {
   EmpresaRoute: typeof EmpresaRoute
   FavoritosRoute: typeof FavoritosRoute
   FeedRoute: typeof FeedRoute
-  FerramentasIaRoute: typeof FerramentasIaRoute
   LoginRoute: typeof LoginRoute
   PlanosRoute: typeof PlanosRoute
   ProfissionaisAtivosRoute: typeof ProfissionaisAtivosRouteWithChildren
@@ -422,13 +409,6 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ferramentas-ia': {
-      id: '/ferramentas-ia'
-      path: '/ferramentas-ia'
-      fullPath: '/ferramentas-ia'
-      preLoaderRoute: typeof FerramentasIaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/feed': {
@@ -661,7 +641,6 @@ const rootRouteChildren: RootRouteChildren = {
   EmpresaRoute: EmpresaRoute,
   FavoritosRoute: FavoritosRoute,
   FeedRoute: FeedRoute,
-  FerramentasIaRoute: FerramentasIaRoute,
   LoginRoute: LoginRoute,
   PlanosRoute: PlanosRoute,
   ProfissionaisAtivosRoute: ProfissionaisAtivosRouteWithChildren,
@@ -673,3 +652,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

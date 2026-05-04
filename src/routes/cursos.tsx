@@ -48,6 +48,19 @@ function CursosPage() {
 
   const heroCourse = courses[0];
 
+  if (courses.length === 0) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
+        <div className="text-center max-w-md">
+          <h1 className="font-display text-3xl font-bold">Nenhum curso disponível</h1>
+          <p className="mt-3 text-white/60">Em breve novos cursos serão publicados na área de membros.</p>
+          <Link to="/" className="mt-6 inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">Voltar para o início</Link>
+        </div>
+      </div>
+    );
+  }
+
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Banner - Full Width */}

@@ -55,6 +55,7 @@ export type Database = {
           description: string | null
           employee_count: number | null
           id: string
+          is_hidden: boolean
           logo_url: string | null
           phone: string | null
           state: string | null
@@ -70,6 +71,7 @@ export type Database = {
           description?: string | null
           employee_count?: number | null
           id?: string
+          is_hidden?: boolean
           logo_url?: string | null
           phone?: string | null
           state?: string | null
@@ -85,6 +87,7 @@ export type Database = {
           description?: string | null
           employee_count?: number | null
           id?: string
+          is_hidden?: boolean
           logo_url?: string | null
           phone?: string | null
           state?: string | null
@@ -309,6 +312,45 @@ export type Database = {
           },
         ]
       }
+      posts: {
+        Row: {
+          author_name: string
+          author_role: string
+          content: string
+          created_at: string
+          id: string
+          image_url: string | null
+          is_hidden: boolean
+          updated_at: string
+          user_id: string
+          video_url: string | null
+        }
+        Insert: {
+          author_name?: string
+          author_role?: string
+          content?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_hidden?: boolean
+          updated_at?: string
+          user_id: string
+          video_url?: string | null
+        }
+        Update: {
+          author_name?: string
+          author_role?: string
+          content?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_hidden?: boolean
+          updated_at?: string
+          user_id?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -320,6 +362,7 @@ export type Database = {
           experience_years: number | null
           full_name: string
           id: string
+          is_hidden: boolean
           phone: string | null
           specializations: string[] | null
           state: string | null
@@ -336,6 +379,7 @@ export type Database = {
           experience_years?: number | null
           full_name?: string
           id?: string
+          is_hidden?: boolean
           phone?: string | null
           specializations?: string[] | null
           state?: string | null
@@ -352,6 +396,7 @@ export type Database = {
           experience_years?: number | null
           full_name?: string
           id?: string
+          is_hidden?: boolean
           phone?: string | null
           specializations?: string[] | null
           state?: string | null

@@ -55,6 +55,7 @@ function JobDetail() {
   const [open, setOpen] = useState(false);
   const [applied, setApplied] = useState(false);
   const [saved, setSaved] = useState(false);
+  const gate = useAuthGate();
 
   const handleApply = () => {
     setApplied(true);

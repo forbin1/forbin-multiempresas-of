@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VagasRouteImport } from './routes/vagas'
 import { Route as ProfissionalRouteImport } from './routes/profissional'
+import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as FeedRouteImport } from './routes/feed'
 import { Route as EmpresaRouteImport } from './routes/empresa'
@@ -29,6 +30,11 @@ const VagasRoute = VagasRouteImport.update({
 const ProfissionalRoute = ProfissionalRouteImport.update({
   id: '/profissional',
   path: '/profissional',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/empresa': typeof EmpresaRoute
   '/feed': typeof FeedRoute
   '/login': typeof LoginRoute
+  '/planos': typeof PlanosRoute
   '/profissional': typeof ProfissionalRoute
   '/vagas': typeof VagasRouteWithChildren
   '/cursos/$courseId': typeof CursosCourseIdRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/empresa': typeof EmpresaRoute
   '/feed': typeof FeedRoute
   '/login': typeof LoginRoute
+  '/planos': typeof PlanosRoute
   '/profissional': typeof ProfissionalRoute
   '/vagas': typeof VagasRouteWithChildren
   '/cursos/$courseId': typeof CursosCourseIdRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/empresa': typeof EmpresaRoute
   '/feed': typeof FeedRoute
   '/login': typeof LoginRoute
+  '/planos': typeof PlanosRoute
   '/profissional': typeof ProfissionalRoute
   '/vagas': typeof VagasRouteWithChildren
   '/cursos/$courseId': typeof CursosCourseIdRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/empresa'
     | '/feed'
     | '/login'
+    | '/planos'
     | '/profissional'
     | '/vagas'
     | '/cursos/$courseId'
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/empresa'
     | '/feed'
     | '/login'
+    | '/planos'
     | '/profissional'
     | '/vagas'
     | '/cursos/$courseId'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/empresa'
     | '/feed'
     | '/login'
+    | '/planos'
     | '/profissional'
     | '/vagas'
     | '/cursos/$courseId'
@@ -167,6 +179,7 @@ export interface RootRouteChildren {
   EmpresaRoute: typeof EmpresaRoute
   FeedRoute: typeof FeedRoute
   LoginRoute: typeof LoginRoute
+  PlanosRoute: typeof PlanosRoute
   ProfissionalRoute: typeof ProfissionalRoute
   VagasRoute: typeof VagasRouteWithChildren
 }
@@ -185,6 +198,13 @@ declare module '@tanstack/react-router' {
       path: '/profissional'
       fullPath: '/profissional'
       preLoaderRoute: typeof ProfissionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -282,6 +302,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmpresaRoute: EmpresaRoute,
   FeedRoute: FeedRoute,
   LoginRoute: LoginRoute,
+  PlanosRoute: PlanosRoute,
   ProfissionalRoute: ProfissionalRoute,
   VagasRoute: VagasRouteWithChildren,
 }

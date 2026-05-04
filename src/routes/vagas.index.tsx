@@ -17,7 +17,7 @@ import { JOBS, COURSES } from "@/data/mock";
 import { ADS, AdBanner } from "@/components/AdBanner";
 import heroImage from "@/assets/vagas-hero.jpg";
 
-export const Route = createFileRoute("/vagas")({
+export const Route = createFileRoute("/vagas/")({
   head: () => ({
     meta: [
       { title: "Vagas — FORBIN MultiEmpresas" },

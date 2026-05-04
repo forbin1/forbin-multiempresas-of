@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VagasRouteImport } from './routes/vagas'
 import { Route as ProfissionalRouteImport } from './routes/profissional'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as LoginRouteImport } from './routes/login'
@@ -20,14 +19,10 @@ import { Route as CadastroEmpresaRouteImport } from './routes/cadastro-empresa'
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VagasIndexRouteImport } from './routes/vagas.index'
 import { Route as VagasJobIdRouteImport } from './routes/vagas.$jobId'
 import { Route as CursosCourseIdRouteImport } from './routes/cursos.$courseId'
 
-const VagasRoute = VagasRouteImport.update({
-  id: '/vagas',
-  path: '/vagas',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProfissionalRoute = ProfissionalRouteImport.update({
   id: '/profissional',
   path: '/profissional',
@@ -78,10 +73,15 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VagasIndexRoute = VagasIndexRouteImport.update({
+  id: '/vagas/',
+  path: '/vagas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VagasJobIdRoute = VagasJobIdRouteImport.update({
-  id: '/$jobId',
-  path: '/$jobId',
-  getParentRoute: () => VagasRoute,
+  id: '/vagas/$jobId',
+  path: '/vagas/$jobId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const CursosCourseIdRoute = CursosCourseIdRouteImport.update({
   id: '/$courseId',
@@ -100,9 +100,9 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
   '/profissional': typeof ProfissionalRoute
-  '/vagas': typeof VagasRouteWithChildren
   '/cursos/$courseId': typeof CursosCourseIdRoute
   '/vagas/$jobId': typeof VagasJobIdRoute
+  '/vagas/': typeof VagasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -115,9 +115,9 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
   '/profissional': typeof ProfissionalRoute
-  '/vagas': typeof VagasRouteWithChildren
   '/cursos/$courseId': typeof CursosCourseIdRoute
   '/vagas/$jobId': typeof VagasJobIdRoute
+  '/vagas': typeof VagasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -131,9 +131,9 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
   '/profissional': typeof ProfissionalRoute
-  '/vagas': typeof VagasRouteWithChildren
   '/cursos/$courseId': typeof CursosCourseIdRoute
   '/vagas/$jobId': typeof VagasJobIdRoute
+  '/vagas/': typeof VagasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -148,9 +148,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/planos'
     | '/profissional'
-    | '/vagas'
     | '/cursos/$courseId'
     | '/vagas/$jobId'
+    | '/vagas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -163,9 +163,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/planos'
     | '/profissional'
-    | '/vagas'
     | '/cursos/$courseId'
     | '/vagas/$jobId'
+    | '/vagas'
   id:
     | '__root__'
     | '/'
@@ -178,9 +178,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/planos'
     | '/profissional'
-    | '/vagas'
     | '/cursos/$courseId'
     | '/vagas/$jobId'
+    | '/vagas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -194,18 +194,12 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   PlanosRoute: typeof PlanosRoute
   ProfissionalRoute: typeof ProfissionalRoute
-  VagasRoute: typeof VagasRouteWithChildren
+  VagasJobIdRoute: typeof VagasJobIdRoute
+  VagasIndexRoute: typeof VagasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/vagas': {
-      id: '/vagas'
-      path: '/vagas'
-      fullPath: '/vagas'
-      preLoaderRoute: typeof VagasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/profissional': {
       id: '/profissional'
       path: '/profissional'
@@ -276,12 +270,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vagas/': {
+      id: '/vagas/'
+      path: '/vagas'
+      fullPath: '/vagas/'
+      preLoaderRoute: typeof VagasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vagas/$jobId': {
       id: '/vagas/$jobId'
-      path: '/$jobId'
+      path: '/vagas/$jobId'
       fullPath: '/vagas/$jobId'
       preLoaderRoute: typeof VagasJobIdRouteImport
-      parentRoute: typeof VagasRoute
+      parentRoute: typeof rootRouteImport
     }
     '/cursos/$courseId': {
       id: '/cursos/$courseId'
@@ -304,16 +305,6 @@ const CursosRouteChildren: CursosRouteChildren = {
 const CursosRouteWithChildren =
   CursosRoute._addFileChildren(CursosRouteChildren)
 
-interface VagasRouteChildren {
-  VagasJobIdRoute: typeof VagasJobIdRoute
-}
-
-const VagasRouteChildren: VagasRouteChildren = {
-  VagasJobIdRoute: VagasJobIdRoute,
-}
-
-const VagasRouteWithChildren = VagasRoute._addFileChildren(VagasRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
@@ -325,7 +316,8 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   PlanosRoute: PlanosRoute,
   ProfissionalRoute: ProfissionalRoute,
-  VagasRoute: VagasRouteWithChildren,
+  VagasJobIdRoute: VagasJobIdRoute,
+  VagasIndexRoute: VagasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

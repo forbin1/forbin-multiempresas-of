@@ -4,7 +4,6 @@ import {
   MapPin,
   Phone,
   Mail,
-  
   ShieldCheck,
   Briefcase,
   Award,
@@ -17,6 +16,20 @@ import {
   MoreHorizontal,
   Pencil,
   Trash2,
+  Languages,
+  Star,
+  GraduationCap,
+  Car,
+  Target,
+  Share2,
+  Linkedin,
+  Instagram,
+  Globe,
+  
+  Download,
+  PlayCircle,
+  Clock,
+  TrendingUp,
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
@@ -93,30 +106,47 @@ function PerfilProfissional() {
               <Button variant="outline" className="h-12 rounded-full">
                 <Heart className="mr-2 h-5 w-5" /> Salvar
               </Button>
+              <Button variant="outline" size="icon" className="h-12 w-12 rounded-full" title="Compartilhar">
+                <Share2 className="h-5 w-5" />
+              </Button>
+              <Button variant="outline" size="icon" className="h-12 w-12 rounded-full" title="Baixar currículo">
+                <Download className="h-5 w-5" />
+              </Button>
             </div>
           </div>
 
+          {/* Redes / links rápidos */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            <SocialChip icon={Linkedin} label="LinkedIn" />
+            <SocialChip icon={Instagram} label="@carlos.vigilante" />
+            <SocialChip icon={Globe} label="carlosmendes.com.br" />
+          </div>
+
           {/* Mini stats */}
-          <div className="mt-8 grid grid-cols-3 gap-3 border-t border-border/60 pt-6">
+          <div className="mt-6 grid grid-cols-2 gap-3 border-t border-border/60 pt-6 sm:grid-cols-4">
             <Stat label="Cursos" value="7" />
             <Stat label="Anos de experiência" value="8" />
             <Stat label="Postos atendidos" value="23" />
+            <Stat label="Avaliação" value="4.9 ★" />
           </div>
         </div>
 
         {/* Conteúdo em colunas */}
         <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_320px]">
           <div className="space-y-6">
-            <Tabs defaultValue="feed">
-              <TabsList className="h-12 w-full rounded-2xl bg-card p-1">
-                <TabsTrigger value="feed" className="flex-1 rounded-xl text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Publicações
-                </TabsTrigger>
-                <TabsTrigger value="sobre" className="flex-1 rounded-xl text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            <Tabs defaultValue="sobre">
+              <TabsList className="flex h-auto w-full flex-wrap gap-1 rounded-2xl bg-card p-1">
+                <TabsTrigger value="sobre" className="flex-1 rounded-xl py-2.5 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   Sobre
                 </TabsTrigger>
-                <TabsTrigger value="experiencia" className="flex-1 rounded-xl text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <TabsTrigger value="experiencia" className="flex-1 rounded-xl py-2.5 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   Experiência
+                </TabsTrigger>
+                <TabsTrigger value="competencias" className="flex-1 rounded-xl py-2.5 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                  Competências
+                </TabsTrigger>
+                <TabsTrigger value="feed" className="flex-1 rounded-xl py-2.5 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                  Publicações
                 </TabsTrigger>
               </TabsList>
 
@@ -127,7 +157,7 @@ function PerfilProfissional() {
                 ))}
               </TabsContent>
 
-              <TabsContent value="sobre" className="mt-6">
+              <TabsContent value="sobre" className="mt-6 space-y-6">
                 <Card title="Resumo profissional">
                   <p className="leading-relaxed text-muted-foreground">
                     Vigilante líder com 8 anos de atuação em segurança patrimonial e eventos corporativos.
@@ -135,30 +165,71 @@ function PerfilProfissional() {
                     Disciplina, ética e prontidão são meus pilares.
                   </p>
                 </Card>
-                <Card title="Dados pessoais" className="mt-6">
+
+                <Card title="Vídeo de apresentação">
+                  <div className="relative flex aspect-video items-center justify-center overflow-hidden rounded-xl border border-border/60 bg-gradient-to-br from-surface to-card">
+                    <PlayCircle className="h-16 w-16 text-primary" />
+                    <span className="absolute bottom-3 left-3 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white">
+                      00:48
+                    </span>
+                  </div>
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    Apresentação de 30-60s gravada pelo profissional.
+                  </p>
+                </Card>
+
+                <Card title="Dados pessoais">
                   <DataGrid items={[
                     ["Idade", "34 anos"],
                     ["Altura", "1,82 m"],
                     ["Estado civil", "Casado"],
-                    ["Serviço militar", "Exército — Tiro de Guerra"],
-                    ["CNH", "Categoria B"],
+                    ["Filhos", "2"],
+                    ["Naturalidade", "Belo Horizonte/MG"],
+                    ["Endereço", "Tatuapé, São Paulo/SP"],
+                  ]} />
+                </Card>
+
+                <Card title="Documentação & habilitações">
+                  <DataGrid items={[
+                    ["CNV (Carteira Nacional de Vigilante)", "SP-2018-0034521"],
+                    ["Validade da reciclagem", "12/2025"],
+                    ["Serviço militar", "Exército — Tiro de Guerra (Dispensado)"],
+                    ["CNH", "Categoria B — Válida até 2027"],
+                    ["Antecedentes", "Negativo (atualizado 03/2026)"],
                     ["Disponibilidade", "Imediata"],
                   ]} />
+                </Card>
+
+                <Card title="Idiomas">
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { lang: "Português", level: "Nativo" },
+                      { lang: "Espanhol", level: "Intermediário" },
+                      { lang: "Inglês", level: "Básico" },
+                    ].map((l) => (
+                      <div key={l.lang} className="flex items-center gap-2 rounded-full border border-border/60 bg-surface px-4 py-2">
+                        <Languages className="h-4 w-4 text-primary" />
+                        <span className="text-sm font-medium">{l.lang}</span>
+                        <span className="text-xs text-muted-foreground">· {l.level}</span>
+                      </div>
+                    ))}
+                  </div>
                 </Card>
               </TabsContent>
 
               <TabsContent value="experiencia" className="mt-6 space-y-4">
                 {[
-                  { role: "Vigilante Líder", company: "Vigilância Total LTDA", period: "2021 — atual", desc: "Liderança de equipe de 12 vigilantes em condomínio premium." },
-                  { role: "Vigilante", company: "Águia Negra Segurança", period: "2018 — 2021", desc: "Atuação em postos comerciais e eventos." },
-                  { role: "Porteiro", company: "Edifício Comercial Centro", period: "2016 — 2018", desc: "Controle de acesso e atendimento." },
+                  { role: "Vigilante Líder", company: "Vigilância Total LTDA", period: "2021 — atual", desc: "Liderança de equipe de 12 vigilantes em condomínio premium. Implantação de novas rotinas de ronda e controle de acesso, redução de 40% em incidentes." },
+                  { role: "Vigilante", company: "Águia Negra Segurança", period: "2018 — 2021", desc: "Atuação em postos comerciais e eventos corporativos. Suporte na escolta de valores." },
+                  { role: "Porteiro", company: "Edifício Comercial Centro", period: "2016 — 2018", desc: "Controle de acesso, atendimento ao público e operação de CFTV." },
+                  { role: "Auxiliar de Segurança", company: "Eventos Brasil", period: "2014 — 2016", desc: "Apoio em eventos esportivos e shows com público acima de 5 mil pessoas." },
                 ].map((e) => (
-                  <div key={e.role} className="rounded-2xl border border-border/60 bg-card p-6">
+                  <div key={e.role + e.period} className="rounded-2xl border border-border/60 bg-card p-6">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
                         <Briefcase className="h-5 w-5" />
                       </div>
-                      <div className="flex-1">
+                      <div className="min-w-0 flex-1">
                         <p className="font-semibold">{e.role}</p>
                         <p className="text-sm text-muted-foreground">{e.company} · {e.period}</p>
                         <p className="mt-2 text-sm text-muted-foreground">{e.desc}</p>
@@ -166,36 +237,122 @@ function PerfilProfissional() {
                     </div>
                   </div>
                 ))}
+
+                <Card title="Referências profissionais">
+                  <div className="space-y-3">
+                    {[
+                      { name: "Roberto Almeida", role: "Gerente de Operações — Vigilância Total LTDA", phone: "(11) 98888-0011" },
+                      { name: "Patrícia Souza", role: "Coordenadora — Águia Negra Segurança", phone: "(11) 97777-0022" },
+                    ].map((r) => (
+                      <div key={r.name} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border/60 bg-surface p-4">
+                        <div>
+                          <p className="font-semibold">{r.name}</p>
+                          <p className="text-xs text-muted-foreground">{r.role}</p>
+                        </div>
+                        <span className="text-sm text-muted-foreground">{r.phone}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="competencias" className="mt-6 space-y-6">
+                <Card title="Especializações">
+                  <div className="flex flex-wrap gap-2">
+                    {["Segurança patrimonial", "Escolta armada", "CFTV", "Controle de acesso", "Gestão de equipe", "Eventos corporativos", "Defesa pessoal", "Primeiros socorros"].map((s) => (
+                      <Badge key={s} variant="outline" className="rounded-full border-primary/30 bg-primary/5 text-primary">
+                        {s}
+                      </Badge>
+                    ))}
+                  </div>
+                </Card>
+
+                <Card title="Habilidades técnicas">
+                  <div className="space-y-4">
+                    {[
+                      { skill: "Operação de CFTV", level: 90 },
+                      { skill: "Tiro defensivo", level: 80 },
+                      { skill: "Liderança de equipe", level: 95 },
+                      { skill: "Pacote Office", level: 70 },
+                    ].map((s) => (
+                      <div key={s.skill}>
+                        <div className="mb-1.5 flex justify-between text-sm">
+                          <span className="font-medium">{s.skill}</span>
+                          <span className="text-muted-foreground">{s.level}%</span>
+                        </div>
+                        <div className="h-2 overflow-hidden rounded-full bg-surface">
+                          <div className="h-full rounded-full bg-gradient-gold" style={{ width: `${s.level}%` }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+
+                <Card title="Treinamentos & cursos">
+                  <ul className="space-y-3">
+                    {[
+                      { name: "Formação de Vigilante", inst: "FORBIN", year: 2016, hours: 200 },
+                      { name: "Reciclagem Anual", inst: "FORBIN", year: 2024, hours: 50 },
+                      { name: "Vigilante Líder", inst: "ABCSeg", year: 2020, hours: 80 },
+                      { name: "Operador de CFTV", inst: "TecnoSeg", year: 2021, hours: 40 },
+                      { name: "Defesa Pessoal Tática", inst: "Krav Maga BR", year: 2022, hours: 60 },
+                      { name: "Primeiros Socorros", inst: "Cruz Vermelha", year: 2023, hours: 24 },
+                    ].map((c) => (
+                      <li key={c.name} className="flex items-start gap-3 rounded-xl border border-border/60 bg-surface p-3">
+                        <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-semibold">{c.name}</p>
+                          <p className="text-xs text-muted-foreground">{c.inst} · {c.year} · {c.hours}h</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+
+                <Card title="Conquistas">
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Vigilante destaque 2023 — Vigilância Total</li>
+                    <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> 100% de presença em 2 anos consecutivos</li>
+                    <li className="flex items-center gap-2"><Star className="h-4 w-4 text-primary" /> Menção honrosa por intervenção rápida em incidente</li>
+                  </ul>
+                </Card>
               </TabsContent>
             </Tabs>
           </div>
 
           {/* Sidebar */}
           <aside className="space-y-6">
-            <Card title="Cursos & certificações">
-              <ul className="space-y-3">
-                {[
-                  "Formação de Vigilante",
-                  "Reciclagem 2024",
-                  "Vigilante Líder",
-                  "Operador de CFTV",
-                  "Defesa Pessoal",
-                ].map((c) => (
-                  <li key={c} className="flex items-center gap-3">
-                    <Award className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-medium">{c}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            <Card title="Procurando">
+            <Card title="Disponibilidade">
               <div className="space-y-3 text-sm">
                 <Row label="Função" value="Vigilante / Supervisor" />
                 <Row label="Região" value="Grande São Paulo" />
                 <Row label="Modalidade" value="CLT — 12x36" />
+                <Row label="Faixa salarial" value="R$ 2.800 — 4.500" />
                 <Row label="Disponível" value="Imediato" />
+                <Row label="Viagens" value="Sim" />
+                <Row label="Mudança" value="Negociável" />
               </div>
+            </Card>
+
+            <Card title="Métricas do perfil">
+              <div className="space-y-3">
+                <MiniMetric icon={TrendingUp} label="Visualizações (30d)" value="1.248" />
+                <MiniMetric icon={Briefcase} label="Convites recebidos" value="14" />
+                <MiniMetric icon={Clock} label="Tempo de resposta" value="< 2h" />
+              </div>
+            </Card>
+
+            <Card title="Veículo & equipamentos">
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-center gap-2"><Car className="h-4 w-4 text-primary" /> Veículo próprio (moto)</li>
+                <li className="flex items-center gap-2"><Target className="h-4 w-4 text-primary" /> Posse de arma de fogo (CR ativo)</li>
+                <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-primary" /> Colete balístico próprio</li>
+              </ul>
+            </Card>
+
+            <Card title="Contato de emergência">
+              <p className="text-sm font-semibold">Maria Mendes (esposa)</p>
+              <p className="text-xs text-muted-foreground">(11) 99999-1111</p>
             </Card>
 
             <div className="rounded-2xl border border-primary/40 bg-primary/5 p-5">
@@ -214,6 +371,26 @@ function PerfilProfissional() {
           </aside>
         </div>
       </div>
+    </div>
+  );
+}
+
+function SocialChip({ icon: Icon, label }: { icon: React.ElementType; label: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-surface px-3 py-1.5 text-xs text-muted-foreground">
+      <Icon className="h-3.5 w-3.5 text-primary" />
+      {label}
+    </span>
+  );
+}
+
+function MiniMetric({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between rounded-xl border border-border/60 bg-surface p-3">
+      <span className="flex items-center gap-2 text-sm text-muted-foreground">
+        <Icon className="h-4 w-4 text-primary" /> {label}
+      </span>
+      <span className="font-display text-sm font-bold text-foreground">{value}</span>
     </div>
   );
 }

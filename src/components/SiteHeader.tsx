@@ -28,6 +28,7 @@ const NAV_PROFESSIONAL: NavItem[] = [
   { to: "/feed", label: "Experiências" },
   { to: "/certificados", label: "Certificados" },
   { to: "/candidaturas", label: "Candidaturas" },
+  { to: "/ferramentas-ia", label: "IA" },
   { to: "/favoritos", label: "Favoritos" },
 ];
 
@@ -35,6 +36,7 @@ const NAV_COMPANY: NavItem[] = [
   { to: "/profissionais-ativos", label: "Profissionais" },
   { to: "/vagas", label: "Vagas" },
   { to: "/feed", label: "Experiências" },
+  { to: "/ferramentas-ia", label: "IA" },
   { to: "/favoritos", label: "Favoritos" },
 ];
 
@@ -43,6 +45,7 @@ const NAV_ADMIN: NavItem[] = [
   { to: "/profissionais-ativos", label: "Profissionais" },
   { to: "/feed", label: "Experiências" },
   { to: "/cursos", label: "Cursos" },
+  { to: "/ferramentas-ia", label: "IA" },
   { to: "/favoritos", label: "Favoritos" },
 ];
 

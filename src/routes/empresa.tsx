@@ -10,6 +10,17 @@ import {
   Eye,
   MessageSquare,
   XCircle,
+  ShieldCheck,
+  MapPin,
+  Globe,
+  Phone,
+  Mail,
+  Building2,
+  Award,
+  Star,
+  Linkedin,
+  Instagram,
+  Share2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";

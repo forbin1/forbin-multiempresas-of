@@ -61,7 +61,7 @@ function FeedContent() {
           <ComposeBox />
           {POSTS.map((p, idx) => (
             <Fragment key={p.id}>
-              <PostCard post={p} />
+              <PostCard post={p} owned={idx === 0} />
               {(idx + 1) % 2 === 0 && (
                 <AdBanner ad={ADS[Math.floor(idx / 2) % ADS.length]} />
               )}

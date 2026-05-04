@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import heroImg from "@/assets/hero-security.jpg";
 import { JOBS, COURSES } from "@/data/mock";
+import { useLandingContent } from "@/hooks/use-landing-content";
 
 export const Route = createFileRoute("/")({
   head: () => ({

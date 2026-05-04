@@ -92,7 +92,7 @@ function PerfilUsuario() {
   return (
     <div className="pb-12">
       {/* COVER */}
-      <div className="relative h-56 overflow-hidden border-b border-border/60 sm:h-72">
+      <div className="relative h-40 overflow-hidden border-b border-border/60 sm:h-56">
         {cover ? (
           <img src={cover} alt="Capa" className="h-full w-full object-cover" />
         ) : (
@@ -101,6 +101,13 @@ function PerfilUsuario() {
             <div className="absolute inset-0 bg-radial-gold" />
           </>
         )}
+        <button
+          onClick={() => navigate({ to: "/feed" })}
+          className="absolute left-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/70 text-foreground backdrop-blur transition hover:bg-background"
+          aria-label="Voltar"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </button>
         {isOwner && (
           <>
             <Button
@@ -117,14 +124,7 @@ function PerfilUsuario() {
       </div>
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <button
-          onClick={() => navigate({ to: "/feed" })}
-          className="mb-6 mt-6 inline-flex items-center gap-2 rounded-full border border-border/60 bg-card px-4 py-2 text-sm font-medium text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4" /> Voltar
-        </button>
-
-        <div className="rounded-3xl border border-border/60 bg-card p-6 shadow-elevated sm:p-8">
+        <div className="-mt-16 rounded-3xl border border-border/60 bg-card p-6 shadow-elevated sm:p-8">
           <div className="flex flex-wrap items-end gap-6">
             <div className="relative">
               <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-4 border-card bg-gradient-gold font-display text-4xl font-extrabold text-primary-foreground shadow-gold">

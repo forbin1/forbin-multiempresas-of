@@ -312,6 +312,60 @@ export type Database = {
           },
         ]
       }
+      plans: {
+        Row: {
+          audience: string
+          created_at: string
+          cta_label: string | null
+          currency: string
+          description: string | null
+          features: Json
+          highlight: boolean
+          id: string
+          is_published: boolean
+          name: string
+          period: string
+          price_cents: number
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          audience?: string
+          created_at?: string
+          cta_label?: string | null
+          currency?: string
+          description?: string | null
+          features?: Json
+          highlight?: boolean
+          id?: string
+          is_published?: boolean
+          name: string
+          period?: string
+          price_cents?: number
+          slug: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          audience?: string
+          created_at?: string
+          cta_label?: string | null
+          currency?: string
+          description?: string | null
+          features?: Json
+          highlight?: boolean
+          id?: string
+          is_published?: boolean
+          name?: string
+          period?: string
+          price_cents?: number
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           author_name: string

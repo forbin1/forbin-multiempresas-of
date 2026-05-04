@@ -37,10 +37,13 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const { user, role, loading } = useAuth();
-  if (!loading && user) {
-    const target = role === "admin" ? "/admin" : role === "company" ? "/profissionais-ativos" : "/vagas";
-    return <Navigate to={target} />;
-  }
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!loading && user) {
+      const target = role === "admin" ? "/admin" : role === "company" ? "/profissionais-ativos" : "/vagas";
+      navigate({ to: target, replace: true });
+    }
+  }, [loading, user, role, navigate]);
   return (
     <div>
       {/* HERO */}

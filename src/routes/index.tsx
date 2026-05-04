@@ -62,17 +62,15 @@ function HomePage() {
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:px-8 lg:py-28">
           <div className="flex flex-col justify-center">
             <Badge className="mb-6 w-fit gap-2 rounded-full border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary">
-              <Sparkles className="h-3.5 w-3.5" /> Nova era para segurança privada
+              <Sparkles className="h-3.5 w-3.5" /> {c.hero_eyebrow}
             </Badge>
             <h1 className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              Sua próxima{" "}
-              <span className="text-gradient-gold">missão profissional</span>{" "}
-              começa aqui.
+              {c.hero_title_1}{" "}
+              <span className="text-gradient-gold">{c.hero_title_highlight}</span>{" "}
+              {c.hero_title_2}
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground sm:text-xl">
-              FORBIN MultiEmpresas conecta vigilantes, supervisores, escoltas e
-              empresas do setor em uma plataforma feita para quem leva
-              segurança a sério.
+              {c.hero_subtitle}
             </p>
 
             <div className="mt-8">
@@ -82,20 +80,20 @@ function HomePage() {
             <div className="mt-6 flex flex-wrap gap-4">
               <Button asChild size="lg" className="h-14 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground shadow-gold hover:bg-primary/90">
                 <Link to="/cadastro">
-                  Sou profissional <ArrowRight className="ml-2 h-5 w-5" />
+                  {c.hero_cta_pro} <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="h-14 rounded-full border-border bg-surface px-8 text-base font-semibold hover:bg-accent">
                 <Link to="/cadastro-empresa">
-                  Sou empresa
+                  {c.hero_cta_company}
                 </Link>
               </Button>
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 border-t border-border/60 pt-8">
-              <Stat value="2.4k+" label="Profissionais" />
-              <Stat value="380+" label="Empresas" />
-              <Stat value="1.2k+" label="Vagas ativas" />
+              <Stat value={c.stat1_value} label={c.stat1_label} />
+              <Stat value={c.stat2_value} label={c.stat2_label} />
+              <Stat value={c.stat3_value} label={c.stat3_label} />
             </div>
           </div>
 
@@ -103,7 +101,7 @@ function HomePage() {
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-gold opacity-20 blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-border/60 shadow-elevated">
               <img
-                src={heroImg}
+                src={c.hero_image || heroImg}
                 alt="Profissional de segurança em ambiente corporativo"
                 width={1600}
                 height={1024}

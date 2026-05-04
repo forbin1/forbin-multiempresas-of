@@ -73,7 +73,11 @@ function HomePage() {
               segurança a sério.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8">
+              <VslPlayer />
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-4">
               <Button asChild size="lg" className="h-14 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground shadow-gold hover:bg-primary/90">
                 <Link to="/cadastro">
                   Sou profissional <ArrowRight className="ml-2 h-5 w-5" />

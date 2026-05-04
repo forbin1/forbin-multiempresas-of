@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { TrendingUp, Users } from "lucide-react";
+import { TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { POSTS, JOBS } from "@/data/mock";
 import { ComposeBox, PostCard } from "./profissional";

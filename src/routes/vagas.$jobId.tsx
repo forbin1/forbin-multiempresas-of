@@ -111,8 +111,8 @@ function JobDetail() {
             <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex items-start gap-4">
                 <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-primary/30 bg-primary/10 text-lg font-bold text-primary sm:h-20 sm:w-20 sm:text-xl">
-                  {job.logo ? (
-                    <img src={job.logo} alt={job.company} className="h-full w-full object-cover" />
+                  {(job as any).logo ? (
+                    <img src={(job as any).logo} alt={job.company} className="h-full w-full object-cover" />
                   ) : (
                     job.companyInitials
                   )}

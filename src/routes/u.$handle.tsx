@@ -2,7 +2,6 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   MapPin,
-  MessageCircle,
   Heart,
   ArrowLeft,
   Award,
@@ -11,6 +10,7 @@ import {
   ShieldCheck,
   Building2,
 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { findProfileByHandle } from "@/data/profiles";
@@ -163,7 +163,7 @@ function PerfilUsuario() {
               {profile.whatsapp && (
                 <Button asChild className="h-12 rounded-full bg-[#25D366] px-6 font-semibold text-white hover:bg-[#1ebe5a]">
                   <a href={`https://wa.me/${profile.whatsapp}`} target="_blank" rel="noreferrer">
-                    <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
+                    <WhatsAppIcon className="mr-2 h-5 w-5 text-white" /> WhatsApp
                   </a>
                 </Button>
               )}

@@ -90,10 +90,19 @@ function JobDetail() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-      <Link to="/vagas" className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-        <ArrowLeft className="h-4 w-4" /> Voltar para vagas
-      </Link>
+    <div>
+      {/* Cover banner 16:9 */}
+      <div className="relative w-full overflow-hidden">
+        <div className="relative aspect-video max-h-[60vh] w-full">
+          <img src={job.cover} alt={job.title} className="h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <Link to="/vagas" className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="h-4 w-4" /> Voltar para vagas
+        </Link>
 
       <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
         {/* Coluna principal */}
@@ -224,6 +233,7 @@ function JobDetail() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      </div>
     </div>
   );
 }

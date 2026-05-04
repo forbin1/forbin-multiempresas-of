@@ -27,9 +27,19 @@ export type Job = {
   description: string;
   requirements: string[];
   benefits: string[];
+  cover: string;
 };
 
-export const JOBS: Job[] = [
+const COVERS = [
+  "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1280&h=720&fit=crop",
+  "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1280&h=720&fit=crop",
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1280&h=720&fit=crop",
+  "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1280&h=720&fit=crop",
+  "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1280&h=720&fit=crop",
+  "https://images.unsplash.com/photo-1564540583246-934409427776?w=1280&h=720&fit=crop",
+];
+
+export const JOBS: Job[] = ([
   {
     id: "vig-noturno-sp",
     title: "Vigilante Noturno — Condomínio Premium",
@@ -121,7 +131,7 @@ export const JOBS: Job[] = [
     requirements: ["Curso de Porteiro", "Ensino médio completo"],
     benefits: ["Vale alimentação", "Vale transporte", "Plano odontológico"],
   },
-];
+] as Omit<Job, "cover">[]).map((j, i) => ({ ...j, cover: COVERS[i % COVERS.length] }));
 
 export type Post = {
   id: string;

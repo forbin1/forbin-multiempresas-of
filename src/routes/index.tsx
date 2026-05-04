@@ -205,13 +205,13 @@ function HomePage() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {COURSES.map((c) => (
+            {COURSES.map((course) => (
               <div
-                key={c}
+                key={course}
                 className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card px-4 py-5 transition hover:border-primary/40"
               >
                 <GraduationCap className="h-5 w-5 shrink-0 text-primary" />
-                <span className="text-sm font-medium">{c}</span>
+                <span className="text-sm font-medium">{course}</span>
               </div>
             ))}
           </div>

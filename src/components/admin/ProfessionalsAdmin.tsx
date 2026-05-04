@@ -83,8 +83,8 @@ export function ProfessionalsAdmin() {
         description="Editar, ocultar e excluir profissionais cadastrados."
       />
 
-      <div className="mb-5 flex items-center gap-2">
-        <div className="relative flex-1 max-w-md">
+      <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+        <div className="relative flex-1 sm:max-w-md">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar por nome, cidade ou CNV…" className="pl-10" />
         </div>
@@ -99,42 +99,50 @@ export function ProfessionalsAdmin() {
         </div>
       ) : (
         <div className="overflow-hidden rounded-2xl border border-border/60 bg-card">
-          <table className="w-full text-sm">
-            <thead className="border-b border-border/60 text-left text-xs uppercase tracking-wider text-muted-foreground">
-              <tr>
-                <th className="px-4 py-3">Nome</th>
-                <th className="px-4 py-3">Local</th>
-                <th className="px-4 py-3">CNV</th>
-                <th className="px-4 py-3">Exp.</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3 text-right">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((p) => (
-                <tr key={p.id} className="border-b border-border/40 last:border-0">
-                  <td className="px-4 py-3 font-medium">{p.full_name || "—"}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{[p.city, p.state].filter(Boolean).join(" / ") || "—"}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{p.cnv_number || "—"}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{p.experience_years ?? 0}a</td>
-                  <td className="px-4 py-3">
-                    <span className={"inline-flex items-center rounded-full px-2 py-0.5 text-xs " + (p.is_hidden ? "bg-muted text-muted-foreground" : "bg-emerald-500/15 text-emerald-400")}>
-                      {p.is_hidden ? "Oculto" : "Visível"}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex justify-end gap-1">
-                      <Button size="icon" variant="ghost" onClick={() => toggleHidden(p)} title={p.is_hidden ? "Exibir" : "Ocultar"}>
-                        {p.is_hidden ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
-                      </Button>
-                      <Button size="icon" variant="ghost" onClick={() => setEditing(p)}><Pencil className="h-4 w-4" /></Button>
-                      <Button size="icon" variant="ghost" onClick={() => setDeleteId(p.id)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
-                    </div>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] text-sm">
+              <thead className="border-b border-border/60 text-left text-xs uppercase tracking-wider text-muted-foreground">
+                <tr>
+                  <th className="px-4 py-3">Nome</th>
+                  <th className="hidden px-4 py-3 sm:table-cell">Local</th>
+                  <th className="hidden px-4 py-3 md:table-cell">CNV</th>
+                  <th className="hidden px-4 py-3 md:table-cell">Exp.</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3 text-right">Ações</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filtered.map((p) => (
+                  <tr key={p.id} className="border-b border-border/40 last:border-0">
+                    <td className="px-4 py-3 font-medium">
+                      <div className="truncate">{p.full_name || "—"}</div>
+                      <div className="text-xs text-muted-foreground sm:hidden">
+                        {[p.city, p.state].filter(Boolean).join(" / ") || "—"}
+                        {p.cnv_number ? ` · CNV ${p.cnv_number}` : ""}
+                      </div>
+                    </td>
+                    <td className="hidden px-4 py-3 text-muted-foreground sm:table-cell">{[p.city, p.state].filter(Boolean).join(" / ") || "—"}</td>
+                    <td className="hidden px-4 py-3 text-muted-foreground md:table-cell">{p.cnv_number || "—"}</td>
+                    <td className="hidden px-4 py-3 text-muted-foreground md:table-cell">{p.experience_years ?? 0}a</td>
+                    <td className="px-4 py-3">
+                      <span className={"inline-flex items-center rounded-full px-2 py-0.5 text-xs " + (p.is_hidden ? "bg-muted text-muted-foreground" : "bg-emerald-500/15 text-emerald-400")}>
+                        {p.is_hidden ? "Oculto" : "Visível"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex justify-end gap-1">
+                        <Button size="icon" variant="ghost" onClick={() => toggleHidden(p)} title={p.is_hidden ? "Exibir" : "Ocultar"}>
+                          {p.is_hidden ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
+                        </Button>
+                        <Button size="icon" variant="ghost" onClick={() => setEditing(p)}><Pencil className="h-4 w-4" /></Button>
+                        <Button size="icon" variant="ghost" onClick={() => setDeleteId(p.id)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

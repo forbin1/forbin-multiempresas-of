@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pencil, Trash2, Eye, EyeOff, Plus, Briefcase, Loader2 } from "lucide-react";
+import { Pencil, Trash2, Eye, EyeOff, Plus, Briefcase, Loader2, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
+import { generateJobDescription } from "@/server/ai-tools.functions";
 
 type Job = {
   id: string;

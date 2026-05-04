@@ -117,17 +117,14 @@ export function AdminMobileBar() {
 
   return (
     <div className="flex items-center justify-between border-b border-border/60 bg-card px-4 py-3 lg:hidden">
-      <a
-        href="#"
-        onClick={(e) => {
-          e.preventDefault();
-          navigate({ to: getReturnPath() });
-        }}
-        className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+      <Button
+        variant="ghost"
+        size="icon"
+        aria-label="Voltar à plataforma"
+        onClick={() => navigate({ to: getReturnPath() })}
       >
-        <ArrowLeft className="h-4 w-4" /> Plataforma
-      </a>
-      <p className="text-xs font-semibold uppercase tracking-widest text-primary">Admin</p>
+        <ArrowLeft className="h-5 w-5" />
+      </Button>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon" aria-label="Abrir menu">

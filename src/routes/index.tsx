@@ -297,18 +297,17 @@ function HomePage() {
         <div className="absolute inset-0 bg-radial-gold opacity-60" />
         <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 lg:px-8">
           <h2 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
-            Pronto para a próxima missão?
+            {c.cta_title}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Cadastre-se gratuitamente e comece a se conectar com as melhores empresas
-            de segurança privada do Brasil.
+            {c.cta_subtitle}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg" className="h-14 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-gold hover:bg-primary/90">
-              <Link to="/cadastro">Criar conta grátis</Link>
+              <Link to="/cadastro">{c.cta_btn_primary}</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="h-14 rounded-full border-border bg-surface px-10 text-base font-semibold">
-              <Link to="/vagas">Explorar vagas</Link>
+              <Link to="/vagas">{c.cta_btn_secondary}</Link>
             </Button>
           </div>
         </div>

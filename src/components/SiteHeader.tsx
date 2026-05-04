@@ -31,8 +31,10 @@ export function SiteHeader() {
     navigate({ to: "/" });
   };
 
-  const dashboardLink = role === "company" ? "/empresa" : "/profissional";
-  const dashboardLabel = role === "company" ? "Painel Empresa" : "Meu Painel";
+  const dashboardLink =
+    role === "admin" ? "/admin" : role === "company" ? "/empresa" : "/profissional";
+  const dashboardLabel =
+    role === "admin" ? "Painel Admin" : role === "company" ? "Painel Empresa" : "Meu Painel";
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-xl">

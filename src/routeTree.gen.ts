@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProfissionalRouteImport } from './routes/profissional'
+import { Route as ProfissionaisAtivosRouteImport } from './routes/profissionais-ativos'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as FeedRouteImport } from './routes/feed'
@@ -21,11 +22,17 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VagasIndexRouteImport } from './routes/vagas.index'
 import { Route as VagasJobIdRouteImport } from './routes/vagas.$jobId'
+import { Route as ProfissionaisAtivosIdRouteImport } from './routes/profissionais-ativos.$id'
 import { Route as CursosCourseIdRouteImport } from './routes/cursos.$courseId'
 
 const ProfissionalRoute = ProfissionalRouteImport.update({
   id: '/profissional',
   path: '/profissional',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfissionaisAtivosRoute = ProfissionaisAtivosRouteImport.update({
+  id: '/profissionais-ativos',
+  path: '/profissionais-ativos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlanosRoute = PlanosRouteImport.update({
@@ -83,6 +90,11 @@ const VagasJobIdRoute = VagasJobIdRouteImport.update({
   path: '/vagas/$jobId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfissionaisAtivosIdRoute = ProfissionaisAtivosIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ProfissionaisAtivosRoute,
+} as any)
 const CursosCourseIdRoute = CursosCourseIdRouteImport.update({
   id: '/$courseId',
   path: '/$courseId',
@@ -99,8 +111,10 @@ export interface FileRoutesByFullPath {
   '/feed': typeof FeedRoute
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
+  '/profissionais-ativos': typeof ProfissionaisAtivosRouteWithChildren
   '/profissional': typeof ProfissionalRoute
   '/cursos/$courseId': typeof CursosCourseIdRoute
+  '/profissionais-ativos/$id': typeof ProfissionaisAtivosIdRoute
   '/vagas/$jobId': typeof VagasJobIdRoute
   '/vagas/': typeof VagasIndexRoute
 }
@@ -114,8 +128,10 @@ export interface FileRoutesByTo {
   '/feed': typeof FeedRoute
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
+  '/profissionais-ativos': typeof ProfissionaisAtivosRouteWithChildren
   '/profissional': typeof ProfissionalRoute
   '/cursos/$courseId': typeof CursosCourseIdRoute
+  '/profissionais-ativos/$id': typeof ProfissionaisAtivosIdRoute
   '/vagas/$jobId': typeof VagasJobIdRoute
   '/vagas': typeof VagasIndexRoute
 }
@@ -130,8 +146,10 @@ export interface FileRoutesById {
   '/feed': typeof FeedRoute
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
+  '/profissionais-ativos': typeof ProfissionaisAtivosRouteWithChildren
   '/profissional': typeof ProfissionalRoute
   '/cursos/$courseId': typeof CursosCourseIdRoute
+  '/profissionais-ativos/$id': typeof ProfissionaisAtivosIdRoute
   '/vagas/$jobId': typeof VagasJobIdRoute
   '/vagas/': typeof VagasIndexRoute
 }
@@ -147,8 +165,10 @@ export interface FileRouteTypes {
     | '/feed'
     | '/login'
     | '/planos'
+    | '/profissionais-ativos'
     | '/profissional'
     | '/cursos/$courseId'
+    | '/profissionais-ativos/$id'
     | '/vagas/$jobId'
     | '/vagas/'
   fileRoutesByTo: FileRoutesByTo
@@ -162,8 +182,10 @@ export interface FileRouteTypes {
     | '/feed'
     | '/login'
     | '/planos'
+    | '/profissionais-ativos'
     | '/profissional'
     | '/cursos/$courseId'
+    | '/profissionais-ativos/$id'
     | '/vagas/$jobId'
     | '/vagas'
   id:
@@ -177,8 +199,10 @@ export interface FileRouteTypes {
     | '/feed'
     | '/login'
     | '/planos'
+    | '/profissionais-ativos'
     | '/profissional'
     | '/cursos/$courseId'
+    | '/profissionais-ativos/$id'
     | '/vagas/$jobId'
     | '/vagas/'
   fileRoutesById: FileRoutesById
@@ -193,6 +217,7 @@ export interface RootRouteChildren {
   FeedRoute: typeof FeedRoute
   LoginRoute: typeof LoginRoute
   PlanosRoute: typeof PlanosRoute
+  ProfissionaisAtivosRoute: typeof ProfissionaisAtivosRouteWithChildren
   ProfissionalRoute: typeof ProfissionalRoute
   VagasJobIdRoute: typeof VagasJobIdRoute
   VagasIndexRoute: typeof VagasIndexRoute
@@ -205,6 +230,13 @@ declare module '@tanstack/react-router' {
       path: '/profissional'
       fullPath: '/profissional'
       preLoaderRoute: typeof ProfissionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profissionais-ativos': {
+      id: '/profissionais-ativos'
+      path: '/profissionais-ativos'
+      fullPath: '/profissionais-ativos'
+      preLoaderRoute: typeof ProfissionaisAtivosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/planos': {
@@ -284,6 +316,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VagasJobIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profissionais-ativos/$id': {
+      id: '/profissionais-ativos/$id'
+      path: '/$id'
+      fullPath: '/profissionais-ativos/$id'
+      preLoaderRoute: typeof ProfissionaisAtivosIdRouteImport
+      parentRoute: typeof ProfissionaisAtivosRoute
+    }
     '/cursos/$courseId': {
       id: '/cursos/$courseId'
       path: '/$courseId'
@@ -305,6 +344,17 @@ const CursosRouteChildren: CursosRouteChildren = {
 const CursosRouteWithChildren =
   CursosRoute._addFileChildren(CursosRouteChildren)
 
+interface ProfissionaisAtivosRouteChildren {
+  ProfissionaisAtivosIdRoute: typeof ProfissionaisAtivosIdRoute
+}
+
+const ProfissionaisAtivosRouteChildren: ProfissionaisAtivosRouteChildren = {
+  ProfissionaisAtivosIdRoute: ProfissionaisAtivosIdRoute,
+}
+
+const ProfissionaisAtivosRouteWithChildren =
+  ProfissionaisAtivosRoute._addFileChildren(ProfissionaisAtivosRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
@@ -315,6 +365,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeedRoute: FeedRoute,
   LoginRoute: LoginRoute,
   PlanosRoute: PlanosRoute,
+  ProfissionaisAtivosRoute: ProfissionaisAtivosRouteWithChildren,
   ProfissionalRoute: ProfissionalRoute,
   VagasJobIdRoute: VagasJobIdRoute,
   VagasIndexRoute: VagasIndexRoute,

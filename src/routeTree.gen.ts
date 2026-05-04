@@ -18,6 +18,7 @@ import { Route as EmpresaRouteImport } from './routes/empresa'
 import { Route as CursosRouteImport } from './routes/cursos'
 import { Route as CadastroEmpresaRouteImport } from './routes/cadastro-empresa'
 import { Route as CadastroRouteImport } from './routes/cadastro'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VagasJobIdRouteImport } from './routes/vagas.$jobId'
 import { Route as CursosCourseIdRouteImport } from './routes/cursos.$courseId'
@@ -67,6 +68,11 @@ const CadastroRoute = CadastroRouteImport.update({
   path: '/cadastro',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -85,6 +91,7 @@ const CursosCourseIdRoute = CursosCourseIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/cursos': typeof CursosRouteWithChildren
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/cursos': typeof CursosRouteWithChildren
@@ -114,6 +122,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/cursos': typeof CursosRouteWithChildren
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/cadastro'
     | '/cadastro-empresa'
     | '/cursos'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/cadastro'
     | '/cadastro-empresa'
     | '/cursos'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/cadastro'
     | '/cadastro-empresa'
     | '/cursos'
@@ -173,6 +185,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   CadastroRoute: typeof CadastroRoute
   CadastroEmpresaRoute: typeof CadastroEmpresaRoute
   CursosRoute: typeof CursosRouteWithChildren
@@ -249,6 +262,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CadastroRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -296,6 +316,7 @@ const VagasRouteWithChildren = VagasRoute._addFileChildren(VagasRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   CadastroRoute: CadastroRoute,
   CadastroEmpresaRoute: CadastroEmpresaRoute,
   CursosRoute: CursosRouteWithChildren,

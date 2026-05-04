@@ -19,6 +19,7 @@ import {
   Pencil,
   Trash2,
 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -86,7 +87,7 @@ function PerfilProfissional() {
             <div className="flex flex-wrap gap-3">
               <Button asChild className="h-12 rounded-full bg-[#25D366] px-6 font-semibold text-white hover:bg-[#1ebe5a]">
                 <a href="https://wa.me/5511999990000" target="_blank" rel="noreferrer">
-                  <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
+                  <WhatsAppIcon className="mr-2 h-5 w-5 text-white" /> WhatsApp
                 </a>
               </Button>
               <Button variant="outline" className="h-12 rounded-full">

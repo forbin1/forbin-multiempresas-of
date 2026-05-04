@@ -1,5 +1,6 @@
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
-import { MessageCircle, MapPin, Shield, Heart } from "lucide-react";
+import { MapPin, Shield, Heart } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { PROFILES } from "@/data/profiles";
@@ -62,7 +63,7 @@ function ProfissionaisAtivos() {
                 {p.whatsapp && (
                   <Button asChild size="sm" className="flex-1 rounded-full bg-[#25D366] text-white hover:bg-[#1ebe5a]">
                     <a href={`https://wa.me/${p.whatsapp}`} target="_blank" rel="noreferrer">
-                      <MessageCircle className="mr-1.5 h-4 w-4" /> WhatsApp
+                      <WhatsAppIcon className="mr-1.5 h-4 w-4 text-white" /> WhatsApp
                     </a>
                   </Button>
                 )}

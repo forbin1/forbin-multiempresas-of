@@ -1,4 +1,5 @@
 import { Outlet, createRootRoute, HeadContent, Scripts, Link, useLocation } from "@tanstack/react-router";
+import { useEffect } from "react";
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -79,6 +80,14 @@ function RootComponent() {
   const isAuthScreen = pathname === "/login";
   const isAdminArea = pathname === "/admin" || pathname.startsWith("/admin/");
   const hideChrome = isAuthScreen || isAdminArea;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!isAdminArea && pathname !== "/login") {
+      window.sessionStorage.setItem("admin:returnTo", pathname);
+    }
+  }, [pathname, isAdminArea]);
+
   return (
     <AuthProvider>
       <div className="flex min-h-screen flex-col bg-background text-foreground">

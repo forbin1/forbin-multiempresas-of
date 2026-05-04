@@ -262,6 +262,18 @@ function Chip({ icon, children }: { icon: React.ReactNode; children: React.React
   );
 }
 
+function InfoTile({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-border/60 bg-surface px-3 py-3">
+      <div className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+        <span className="text-primary">{icon}</span>
+        {label}
+      </div>
+      <div className="mt-1 text-sm font-semibold leading-tight text-foreground">{value}</div>
+    </div>
+  );
+}
+
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between">

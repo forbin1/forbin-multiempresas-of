@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, Fragment } from "react";
-import { MapPin, Search, SlidersHorizontal, Briefcase, Building2 } from "lucide-react";
+import { MapPin, Search, SlidersHorizontal, Briefcase, Building2, Lock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sheet";
 import { JOBS, COURSES } from "@/data/mock";
 import { ADS, AdBanner } from "@/components/AdBanner";
+import { useAuth } from "@/hooks/use-auth";
 import heroImage from "@/assets/vagas-hero.jpg";
 
 export const Route = createFileRoute("/vagas/")({

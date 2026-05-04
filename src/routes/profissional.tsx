@@ -4,7 +4,6 @@ import {
   MapPin,
   Phone,
   Mail,
-  
   ShieldCheck,
   Briefcase,
   Award,
@@ -17,6 +16,20 @@ import {
   MoreHorizontal,
   Pencil,
   Trash2,
+  Languages,
+  Star,
+  GraduationCap,
+  Car,
+  Target,
+  Share2,
+  Linkedin,
+  Instagram,
+  Globe,
+  Share,
+  Download,
+  PlayCircle,
+  Clock,
+  TrendingUp,
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";

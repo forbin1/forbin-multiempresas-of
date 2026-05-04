@@ -177,7 +177,7 @@ export function LandingCms() {
 
         {SECTIONS.map((s) => (
           <TabsContent key={s.id} value={s.id} className="mt-6">
-            <div className="grid gap-5 rounded-2xl border border-border/60 bg-card p-6">
+            <div className="grid gap-5 rounded-2xl border border-border/60 bg-card p-4 sm:p-6">
               {s.fields.map((f) => (
                 <FieldRow
                   key={f.key as string}

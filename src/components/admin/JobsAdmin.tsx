@@ -343,3 +343,132 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     </div>
   );
 }
+
+type JobFormShape = {
+  title: string;
+  city: string | null;
+  state: string | null;
+  modality: string;
+  contract_type: string;
+};
+
+function AIDescriptionHelper({
+  form,
+  onApply,
+}: {
+  form: JobFormShape;
+  onApply: (text: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [idea, setIdea] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState("");
+
+  const run = async () => {
+    if (idea.trim().length < 5) {
+      toast.error("Descreva a vaga em pelo menos uma frase.");
+      return;
+    }
+    setLoading(true);
+    setPreview("");
+    try {
+      const r = await generateJobDescription({
+        data: {
+          idea: idea.trim(),
+          title: form.title || undefined,
+          city: form.city || undefined,
+          state: form.state || undefined,
+          modality: form.modality || undefined,
+          contract_type: form.contract_type || undefined,
+        },
+      });
+      setPreview(r.text);
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : "Erro ao gerar");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <div className="mb-2 flex justify-end">
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          className="rounded-full text-xs"
+          onClick={() => setOpen(true)}
+        >
+          <Sparkles className="mr-1.5 h-3.5 w-3.5 text-primary" /> Gerar com IA
+        </Button>
+      </div>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-primary" /> Gerador de descrição com IA
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-4 py-2">
+            <Field label="Descreva a vaga em uma frase">
+              <Textarea
+                rows={3}
+                value={idea}
+                onChange={(e) => setIdea(e.target.value)}
+                placeholder="Ex.: vigilante 12x36 noturno em condomínio residencial, com curso de CFTV e experiência de 1 ano"
+              />
+            </Field>
+            <p className="text-xs text-muted-foreground">
+              Os campos já preenchidos (cargo, local, modalidade, contrato) também serão considerados.
+            </p>
+
+            <Button
+              type="button"
+              onClick={run}
+              disabled={loading}
+              className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              {loading ? (
+                <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Gerando...</>
+              ) : (
+                <><Sparkles className="mr-2 h-4 w-4" /> Gerar descrição</>
+              )}
+            </Button>
+
+            {preview && (
+              <div className="rounded-2xl border border-primary/30 bg-surface p-4">
+                <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-primary">
+                  Prévia
+                </div>
+                <Textarea
+                  value={preview}
+                  onChange={(e) => setPreview(e.target.value)}
+                  rows={12}
+                  className="resize-y rounded-xl bg-background text-sm"
+                />
+              </div>
+            )}
+          </div>
+
+          <DialogFooter>
+            <Button variant="ghost" onClick={() => setOpen(false)}>Cancelar</Button>
+            <Button
+              disabled={!preview}
+              onClick={() => {
+                onApply(preview);
+                setOpen(false);
+                toast.success("Descrição aplicada");
+              }}
+            >
+              Usar esta descrição
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+

@@ -130,17 +130,17 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="mb-14 max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-              Como funciona
+              {c.how_eyebrow}
             </p>
             <h2 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              Três passos para começar
+              {c.how_title}
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {[
-              { icon: Users, title: "Cadastre seu perfil", desc: "Monte um currículo completo: cursos, experiência, foto e dados pessoais. Tudo em passos simples." },
-              { icon: Briefcase, title: "Encontre oportunidades", desc: "Veja vagas no marketplace, filtre por região e função, e candidate-se com um clique." },
-              { icon: Shield, title: "Conecte-se com empresas", desc: "Empresas analisam seu perfil e marcam reuniões direto pelo painel. Simples e direto." },
+              { icon: Users, title: c.how_step1_title, desc: c.how_step1_desc },
+              { icon: Briefcase, title: c.how_step2_title, desc: c.how_step2_desc },
+              { icon: Shield, title: c.how_step3_title, desc: c.how_step3_desc },
             ].map((s, i) => (
               <Card key={s.title} className="group relative overflow-hidden border-border/60 bg-card transition hover:border-primary/40">
                 <CardContent className="p-8">

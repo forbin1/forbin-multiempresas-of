@@ -167,13 +167,13 @@ function HomePage() {
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-                Marketplace
+                {c.jobs_eyebrow}
               </p>
               <h2 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-                Vagas em destaque
+                {c.jobs_title}
               </h2>
               <p className="mt-3 max-w-xl text-muted-foreground">
-                Oportunidades publicadas por empresas verificadas, atualizadas em tempo real.
+                {c.jobs_subtitle}
               </p>
             </div>
             <Button asChild variant="outline" className="rounded-full">

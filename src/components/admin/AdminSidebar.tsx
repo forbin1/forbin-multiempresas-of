@@ -15,7 +15,8 @@ import {
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/Logo";
 
-const ITEMS = [
+type Item = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+const ITEMS: Item[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/vsl", label: "VSL", icon: Video },
   { to: "/admin/cursos", label: "Cursos", icon: GraduationCap },
@@ -25,7 +26,7 @@ const ITEMS = [
   { to: "/admin/landing", label: "Landing Page", icon: LayoutTemplate },
   { to: "/admin/planos", label: "Planos", icon: CreditCard },
   { to: "/admin/certificados", label: "Certificados", icon: Award },
-] as const;
+];
 
 export function AdminSidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });

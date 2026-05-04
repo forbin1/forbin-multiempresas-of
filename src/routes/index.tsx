@@ -223,14 +223,13 @@ function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-              Para empresas
+              {c.company_eyebrow}
             </p>
             <h2 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              Recrute profissionais qualificados em minutos.
+              {c.company_title}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Publique vagas, receba candidaturas filtradas pelo seu painel admin
-              e marque reuniões diretamente com os candidatos.
+              {c.company_subtitle}
             </p>
             <ul className="mt-8 space-y-3">
               {[

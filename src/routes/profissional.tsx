@@ -25,7 +25,7 @@ import {
   Linkedin,
   Instagram,
   Globe,
-  Share,
+  
   Download,
   PlayCircle,
   Clock,

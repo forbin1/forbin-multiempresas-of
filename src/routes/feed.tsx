@@ -48,10 +48,9 @@ function FeedContent() {
           <div className="rounded-2xl border border-border/60 bg-card p-6">
             <h3 className="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">Atalhos</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/vagas" className="block rounded-lg px-3 py-2 hover:bg-accent">📋 Minhas candidaturas</Link></li>
-              <li><Link to="/profissional" className="block rounded-lg px-3 py-2 hover:bg-accent">⭐ Vagas salvas</Link></li>
-              <li><Link to="/feed" className="block rounded-lg px-3 py-2 hover:bg-accent">👥 Conexões</Link></li>
-              <li><Link to="/feed" className="block rounded-lg px-3 py-2 hover:bg-accent">🏆 Cursos</Link></li>
+              <li><Link to="/candidaturas" className="block rounded-lg px-3 py-2 hover:bg-accent">📋 Minhas candidaturas</Link></li>
+              <li><Link to="/favoritos" className="block rounded-lg px-3 py-2 hover:bg-accent">⭐ Favoritos</Link></li>
+              <li><Link to="/cursos" className="block rounded-lg px-3 py-2 hover:bg-accent">🏆 Cursos</Link></li>
             </ul>
           </div>
         </aside>

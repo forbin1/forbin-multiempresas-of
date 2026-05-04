@@ -81,10 +81,12 @@ function JobDetail() {
   };
 
   const handleSave = () => {
-    setSaved((s) => !s);
-    toast(saved ? "Vaga removida dos salvos" : "Vaga salva", {
-      description: saved ? undefined : "Disponível em Vagas salvas no seu painel.",
-    });
+    gate(() => {
+      setSaved((s) => !s);
+      toast(saved ? "Vaga removida dos salvos" : "Vaga salva", {
+        description: saved ? undefined : "Disponível em Vagas salvas no seu painel.",
+      });
+    }, "Faça login para salvar vagas");
   };
 
   return (

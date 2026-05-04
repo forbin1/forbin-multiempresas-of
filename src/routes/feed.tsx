@@ -92,28 +92,6 @@ function FeedContent() {
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-border/60 bg-card p-6">
-            <div className="mb-4 flex items-center gap-2">
-              <Users className="h-4 w-4 text-primary" />
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-primary">Pessoas para conectar</h3>
-            </div>
-            <ul className="space-y-3">
-              {[
-                { n: "Renata Oliveira", r: "Operadora de CFTV", a: "RO" },
-                { n: "Marcos Tavares", r: "Supervisor", a: "MT" },
-                { n: "André Lima", r: "Escolta Armada", a: "AL" },
-              ].map((p) => (
-                <li key={p.n} className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-gold font-bold text-primary-foreground text-sm">{p.a}</div>
-                  <div className="flex-1 min-w-0">
-                    <p className="truncate text-sm font-semibold">{p.n}</p>
-                    <p className="truncate text-xs text-muted-foreground">{p.r}</p>
-                  </div>
-                  <Button size="sm" variant="outline" className="rounded-full text-xs">+ Conectar</Button>
-                </li>
-              ))}
-            </ul>
-          </div>
         </aside>
       </div>
     </div>

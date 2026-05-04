@@ -39,7 +39,7 @@ const COVERS = [
   "https://images.unsplash.com/photo-1564540583246-934409427776?w=1280&h=720&fit=crop",
 ];
 
-export const JOBS: Job[] = [
+export const JOBS: Job[] = ([
   {
     id: "vig-noturno-sp",
     title: "Vigilante Noturno — Condomínio Premium",

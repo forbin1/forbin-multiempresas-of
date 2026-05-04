@@ -145,14 +145,14 @@ function PerfilUsuario() {
             </div>
 
             <div className="flex-1 min-w-[200px]">
-              <div className="flex flex-wrap items-center gap-2">
-                <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">{profile.name}</h1>
+              <div>
                 {profile.kind === "company" ? (
                   <Badge className="rounded-full border-primary/40 bg-primary/15 text-primary"><Building2 className="mr-1 h-3.5 w-3.5" /> Empresa</Badge>
                 ) : (
                   <Badge className="rounded-full border-success/40 bg-success/15 text-success"><ShieldCheck className="mr-1 h-3.5 w-3.5" /> Verificado</Badge>
                 )}
               </div>
+              <h1 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-4xl">{profile.name}</h1>
               <p className="mt-1 text-sm font-medium text-primary">@{profile.handle}</p>
               <p className="mt-1 text-muted-foreground">{profile.role}</p>
               {profile.location && (

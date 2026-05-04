@@ -117,11 +117,14 @@ function PerfilUsuario() {
       </div>
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <button onClick={() => navigate({ to: "/feed" })} className="mt-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
+        <button
+          onClick={() => navigate({ to: "/feed" })}
+          className="mb-6 mt-6 inline-flex items-center gap-2 rounded-full border border-border/60 bg-card px-4 py-2 text-sm font-medium text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+        >
           <ArrowLeft className="h-4 w-4" /> Voltar
         </button>
 
-        <div className="-mt-4 rounded-3xl border border-border/60 bg-card p-6 shadow-elevated sm:p-8">
+        <div className="rounded-3xl border border-border/60 bg-card p-6 shadow-elevated sm:p-8">
           <div className="flex flex-wrap items-end gap-6">
             <div className="relative">
               <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-4 border-card bg-gradient-gold font-display text-4xl font-extrabold text-primary-foreground shadow-gold">

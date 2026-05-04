@@ -125,6 +125,7 @@ export function AdminMobileBar() {
       >
         <ArrowLeft className="h-5 w-5" />
       </Button>
+      <span className="text-sm font-semibold tracking-wide text-foreground">Admin</span>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon" aria-label="Abrir menu">

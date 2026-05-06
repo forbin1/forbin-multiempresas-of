@@ -73,7 +73,7 @@ function HomePage() {
               {c.hero_subtitle}
             </p>
 
-            <div className="mt-8">
+            <div className="mt-8 lg:hidden">
               <VslPlayer />
             </div>
 

@@ -97,17 +97,10 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative hidden lg:block">
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-gold opacity-20 blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-border/60 shadow-elevated">
-              <img
-                src={c.hero_image || heroImg}
-                alt="Profissional de segurança em ambiente corporativo"
-                width={1600}
-                height={1024}
-                className="h-full w-full object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-background via-background/20 to-transparent" />
+              <VslPlayer />
               <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl border border-border/60 bg-background/80 p-4 backdrop-blur-md">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/15 text-primary">

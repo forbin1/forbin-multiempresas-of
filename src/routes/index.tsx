@@ -101,18 +101,6 @@ function HomePage() {
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-gold opacity-20 blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-border/60 shadow-elevated">
               <VslPlayer />
-              <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl border border-border/60 bg-background/80 p-4 backdrop-blur-md">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/15 text-primary">
-                    <Shield className="h-5 w-5" />
-                  </div>
-                  <div className="leading-tight">
-                    <p className="text-sm font-semibold">Verificação de cursos</p>
-                    <p className="text-xs text-muted-foreground">Validamos sua formação FORBIN</p>
-                  </div>
-                </div>
-                <CheckCircle2 className="h-6 w-6 text-success" />
-              </div>
             </div>
           </div>
         </div>
